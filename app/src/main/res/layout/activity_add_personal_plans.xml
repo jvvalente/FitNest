@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddPersonalPlans">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="311dp"
+        android:text="New exercise"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.055"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewWorkoutName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="26dp"
+        android:layout_marginEnd="304dp"
+        android:text="Workout Name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <EditText
+        android:id="@+id/workoutName"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="14dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewWorkoutName"
+        android:background="@drawable/rectangle_for_edit_text"/>
+
+    <TextView
+        android:id="@+id/textViewWorkoutInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="317dp"
+        android:text="Workout Info"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/workoutName" />
+
+    <EditText
+        android:id="@+id/workoutInfo"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="14dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewWorkoutInfo"
+        android:background="@drawable/rectangle_for_edit_text"/>
+
+    <TextView
+        android:id="@+id/textViewWorkoutETC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="364dp"
+        android:text="etc..."
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/workoutInfo" />
+
+    <EditText
+        android:id="@+id/workoutETC"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="14dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewWorkoutETC"
+        android:background="@drawable/rectangle_for_edit_text"/>
+
+    <LinearLayout
+        android:layout_width="389dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="164dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginBottom="64dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/workoutETC">
+
+        <Button
+            android:id="@+id/doneButtonAddPersonalExercise"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Done"
+            android:background="@drawable/rectangle_for_edit_text"/>
+
+        <Button
+            android:id="@+id/cancelButtonAddPersonalExercise"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cancel"
+            android:background="@drawable/rectangle_for_edit_text"/>
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
