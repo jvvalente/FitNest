@@ -20,7 +20,7 @@
                 <gradient
 
                     android:type="sweep" />
-                <solid android:color="#45b6fe" />
+                <solid android:color="#00ff00" />
             </shape>
         </rotate>
     </item>
