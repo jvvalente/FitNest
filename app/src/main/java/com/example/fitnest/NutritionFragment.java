@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
@@ -76,6 +77,20 @@ public class NutritionFragment extends Fragment {
     });
 */
     
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+
+        button = (Button) view.findViewById(R.id.nutritionbutton);
+        button.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(getActivity(), Nutrition2.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     public void openNutrition2(){
