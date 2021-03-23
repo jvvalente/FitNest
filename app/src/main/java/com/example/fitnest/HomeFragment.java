@@ -1,10 +1,13 @@
 package com.example.fitnest;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,8 +58,12 @@ public class HomeFragment extends Fragment {
 
     private int progress = 0;
     private ProgressBar progress_bar;
+    private ProgressBar calorie_progress_bar;
     private Button button_incr;
     private Button button_decr;
+    private Button testButton;
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -81,18 +88,20 @@ public class HomeFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        // Setup any handles to view objects here
-        // EditText etFoo = (EditText) view.findViewById(R.id.etFoo);
+
         progress_bar = view.findViewById(R.id.progress_bar);
+        calorie_progress_bar = view.findViewById(R.id.calorie_progress_bar);
         button_incr = view.findViewById(R.id.button_incr);
         button_decr = view.findViewById(R.id.button_decr);
         TextView date = view.findViewById(R.id.date_textview);
 
         Calendar calendar = Calendar.getInstance();
         String currentDate = DateFormat.getDateInstance().format(calendar.getTime());
-        //progress_bar.setProgress(0);
 
         date.setText(currentDate);
+
+        Intent intent = new Intent(getContext(), PersonalPlans.class);
+        testButton = view.findViewById(R.id.button1);
 
         updateProgressBar();
         button_incr.setOnClickListener(new View.OnClickListener() {
@@ -103,8 +112,6 @@ public class HomeFragment extends Fragment {
                     progress += 10;
                     updateProgressBar();
                 }
-                System.out.println("hellooooooooo");
-
             }
         });
         button_decr.setOnClickListener(new View.OnClickListener() {
@@ -115,32 +122,31 @@ public class HomeFragment extends Fragment {
                     progress -= 10;
                     updateProgressBar();
                 }
-                System.out.println("hellooooooooo1");
+            }
+        });
 
+        testButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(intent);
             }
         });
     }
 
     private void updateProgressBar() {
-        //progress_bar.setProgress(progress);
-        //text_view_progress.text = "$progr%"
 
-        // set the progress
-        progress_bar.setProgress(progress);
+        //TODO: Set water increase/decrease with default in settings
+        //TODO: Connect calorie tracker with circular progress bar
         System.out.println("Progress: " + progress_bar.getProgress());
-        // thread is used to change the progress value
-        Thread thread = new Thread(new Runnable() {
+        //Handler is necessary to update progress bars
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                updateProgressBar();
+                calorie_progress_bar.setProgress(progress);
+                progress_bar.setProgress(progress);
             }
-        });
-        thread.start();
+        },50);
 
     }
 }
