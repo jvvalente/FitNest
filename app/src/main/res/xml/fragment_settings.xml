@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <PreferenceCategory android:title="Profile">
+
+        <EditTextPreference
+            android:key="name"
+            android:title="Name"
+            android:summary="Input full name" />
+
+        <EditTextPreference
+            android:key="weight"
+            android:title="Weight"
+            android:summary="input starting weight" />
+
+        <EditTextPreference
+            android:key="height"
+            android:title="Height"
+            android:summary="Input height" />
+
+        <ListPreference
+            android:entries="@array/activity"
+            android:entryValues="@array/activityLevel"
+            android:key="actLvl"
+            android:title="Activity Level"
+            android:summary="Select an activity level" />
+
+        <ListPreference
+            android:entries="@array/weight"
+            android:entryValues="@array/weightGoal"
+            android:key="goal"
+            android:title="Workout Plan"
+            android:summary="Building muscle or losing fat?" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Other">
+
+        <CheckBoxPreference
+            android:key="notifications"
+            android:summary="Tap to allow notifications"
+            android:title="Push Notifications" />
+
+        <EditTextPreference
+            android:key="waterIntake"
+            android:title="Water Intake"
+            android:summary="Input default amount to increase water intake" />
+
+        <EditTextPreference
+            android:key="mainGoal"
+            android:title="Add a Goal"
+            android:summary="Input your current goal" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
