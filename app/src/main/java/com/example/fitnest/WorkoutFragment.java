@@ -11,6 +11,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.NumberPicker;
+import android.widget.Toast;
 
 import com.example.fitnest.adapters.WorkoutAdapter;
 import com.google.android.youtube.player.YouTubeInitializationResult;
@@ -25,9 +27,6 @@ import devs.mulham.horizontalcalendar.HorizontalCalendar;
 import devs.mulham.horizontalcalendar.utils.HorizontalCalendarListener;
 
 public class WorkoutFragment extends Fragment {
-
-    public static final String YOUTUBE_API_KEY = "AIzaSyAIF6220mZ2d1v53FU7cvOeSh2as1kmT44";
-    YouTubePlayerView youTubePlayerView;
 
     HorizontalCalendar horizontalCalendar;
     RecyclerView rvWorkout;
@@ -49,13 +48,27 @@ public class WorkoutFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_workout, container, false);
 
-        //Try to get the recylcerview to work without the youtube video
-        //youTubePlayerView = v.findViewById(R.id.youtubePlayerView);
-        //initializeYouTube(youTubePlayerView);
-
         workoutList = new ArrayList<>();
         setWorkoutList();
-        /*sets up the RecyclerView and it's adapter*/
+
+        //sets up the RecyclerView and it's adapter
+        v = setRecyclerView(v);
+
+        //sets up the HorizontalCalendar
+        v = setHorizontalCalendar(v);
+
+        return v;
+    }
+
+    //temporaty function to hardcode some values
+    //TODO: get the data from our database
+    private void setWorkoutList(){
+        workoutList.add(new WorkoutItem("pushup"));
+        workoutList.add(new WorkoutItem("sit up"));
+        workoutList.add(new WorkoutItem("weights"));
+    }
+
+    private View setRecyclerView(View v){
         //Get reference to recycler view
         rvWorkout = (RecyclerView) v.findViewById(R.id.rvWorkout);
         //set layout manager
@@ -67,8 +80,10 @@ public class WorkoutFragment extends Fragment {
         //set item animator to Default animator
         rvWorkout.setItemAnimator(new DefaultItemAnimator());
 
+        return v;
+    }
 
-        /*sets up the HorizontalCalendar*/
+    private View setHorizontalCalendar(View v){
         /* starts before 1 month from now */
         Calendar startDate = Calendar.getInstance();
         startDate.add(Calendar.MONTH, -1);
@@ -88,29 +103,7 @@ public class WorkoutFragment extends Fragment {
                 //do something
             }
         });
+
         return v;
-    }
-
-    //temporaty function to hardcode some values
-    //TODO: get the data from our database
-    private void setWorkoutList(){
-        workoutList.add(new WorkoutItem("pushup"));
-        workoutList.add(new WorkoutItem("sit up"));
-        workoutList.add(new WorkoutItem("weights"));
-    }
-
-    private void initializeYouTube(YouTubePlayerView youTubePlayerView){
-        youTubePlayerView.initialize(YOUTUBE_API_KEY, new YouTubePlayer.OnInitializedListener() {
-            @Override
-            public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
-                Log.d("WorkoutFragment", "onInitializationSuccess");
-                youTubePlayer.cueVideo("tKodtNFpzBA");
-            }
-
-            @Override
-            public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
-                Log.d("WorkoutFragment", "onInitializationFailure");
-            }
-        });
     }
 }

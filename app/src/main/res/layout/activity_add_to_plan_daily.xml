@@ -48,7 +48,7 @@
                     android:text="Number of Sets"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_below="@+id/exerciseNum" />
+                    app:layout_constraintBottom_toBottomOf="@+id/exerciseNum" />
 
                 <EditText
                     android:id="@+id/setNum"
@@ -59,7 +59,7 @@
                     android:layout_marginEnd="14dp"
                     android:ems="10"
                     android:inputType="numberDecimal"
-                    app:layout_below="@+id/setNumText"
+                    app:layout_constraintBottom_toBottomOf="@+id/setNumText"
                     android:background="@drawable/rectangle_for_edit_text"/>
 
                 <TextView
@@ -69,7 +69,7 @@
                     android:layout_marginStart="14dp"
                     android:layout_marginTop="12dp"
                     android:text="Number of Repetitions"
-                    app:layout_below="@+id/setNum" />
+                    app:layout_constraintBottom_toBottomOf="@+id/setNum" />
 
                 <EditText
                     android:id="@+id/repNum"
@@ -80,7 +80,7 @@
                     android:layout_marginEnd="14dp"
                     android:ems="10"
                     android:inputType="numberDecimal"
-                    app:layout_below="@+id/repNumText"
+                    app:layout_constraintBottom_toBottomOf="@+id/repNumText"
                     android:background="@drawable/rectangle_for_edit_text"/>
 
                 <TextView
