@@ -3,11 +3,24 @@ package com.example.fitnest;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.NumberPicker;
+import android.widget.Toast;
 
+import com.example.fitnest.adapters.WorkoutAdapter;
+import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayerFragment;
+import com.google.android.youtube.player.YouTubePlayerView;
+
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import devs.mulham.horizontalcalendar.HorizontalCalendar;
@@ -16,6 +29,9 @@ import devs.mulham.horizontalcalendar.utils.HorizontalCalendarListener;
 public class WorkoutFragment extends Fragment {
 
     HorizontalCalendar horizontalCalendar;
+    RecyclerView rvWorkout;
+
+    private ArrayList<WorkoutItem> workoutList;
 
     public WorkoutFragment() {
         // Required empty public constructor
@@ -32,6 +48,42 @@ public class WorkoutFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_workout, container, false);
 
+        workoutList = new ArrayList<>();
+        setWorkoutList();
+
+        //sets up the RecyclerView and it's adapter
+        v = setRecyclerView(v);
+
+        //sets up the HorizontalCalendar
+        v = setHorizontalCalendar(v);
+
+        return v;
+    }
+
+    //temporaty function to hardcode some values
+    //TODO: get the data from our database
+    private void setWorkoutList(){
+        workoutList.add(new WorkoutItem("pushup"));
+        workoutList.add(new WorkoutItem("sit up"));
+        workoutList.add(new WorkoutItem("weights"));
+    }
+
+    private View setRecyclerView(View v){
+        //Get reference to recycler view
+        rvWorkout = (RecyclerView) v.findViewById(R.id.rvWorkout);
+        //set layout manager
+        rvWorkout.setLayoutManager(new LinearLayoutManager(getActivity()));
+        //create an adapter
+        WorkoutAdapter workoutAdapter = new WorkoutAdapter(workoutList);
+        //set the adapter
+        rvWorkout.setAdapter(workoutAdapter);
+        //set item animator to Default animator
+        rvWorkout.setItemAnimator(new DefaultItemAnimator());
+
+        return v;
+    }
+
+    private View setHorizontalCalendar(View v){
         /* starts before 1 month from now */
         Calendar startDate = Calendar.getInstance();
         startDate.add(Calendar.MONTH, -1);
@@ -51,7 +103,6 @@ public class WorkoutFragment extends Fragment {
                 //do something
             }
         });
-
 
         return v;
     }

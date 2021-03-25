@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <!-- Reply Preference -->
+    <string-array name="reply_entries">
+        <item>Reply</item>
+        <item>Reply to all</item>
+    </string-array>
+
+    <string-array name="reply_values">
+        <item>reply</item>
+        <item>reply_all</item>
+    </string-array>
+
+    <string-array name="activity">
+        <item>Beginner</item>
+        <item>Intermediate</item>
+        <item>Advanced</item>
+    </string-array>
+
+    <string-array name="activityLevel">
+        <item>Begin</item>
+        <item>Inter</item>
+        <item>Adv</item>
+    </string-array>
+
+    <string-array name="weight">
+        <item>Build Muscle</item>
+        <item>Lose Fat</item>
+    </string-array>
+
+    <string-array name="weightGoal">
+        <item>Build</item>
+        <item>Lose</item>
+    </string-array>
+
+</resources>

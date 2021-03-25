@@ -1,13 +1,16 @@
 package com.example.fitnest;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
 
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +20,7 @@ import android.widget.TextView;
 
 import java.text.DateFormat;
 import java.util.Calendar;
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -55,6 +59,7 @@ public class HomeFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
+
 
     private int progress = 0;
     private ProgressBar progress_bar;
