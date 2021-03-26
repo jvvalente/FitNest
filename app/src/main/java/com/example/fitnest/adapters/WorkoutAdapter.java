@@ -60,6 +60,8 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.ViewHold
 
         TextView tvWorkoutType;
         TextView tvWorkoutInfo;
+        TextView setsCompleted;
+        TextView repsCompleted;
         NumberPicker numberPickerSets;
         NumberPicker numberPickerReps;
         YouTubePlayerView youTubePlayerView;
@@ -87,12 +89,16 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.ViewHold
 
         //sets both number picker
         private void setNumberPicker(View itemView) {
+            setsCompleted = itemView.findViewById(R.id.setsCompleted);
+            repsCompleted = itemView.findViewById(R.id.repsCompleted);
+
             numberPickerSets = itemView.findViewById(R.id.numberPickerSets);
             numberPickerSets.setMinValue(0);
             numberPickerSets.setMaxValue(10);
             numberPickerSets.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
                 @Override
                 public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                    setsCompleted.setText("" + newVal);
                 }
             });
 
@@ -102,6 +108,7 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.ViewHold
             numberPickerReps.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
                 @Override
                 public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                    repsCompleted.setText("" + newVal);
                 }
             });
         }
