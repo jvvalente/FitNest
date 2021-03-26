@@ -102,38 +102,34 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioButtonLayout" />
 
-    <Button
-        android:id="@+id/addPersonalExerciseButton"
-        android:layout_width="364dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="14dp"
-        android:layout_marginTop="7dp"
-        android:layout_marginEnd="14dp"
-        android:background="@drawable/rectangle_for_edit_text"
-        android:text="Add Exercise"
-        app:layout_constraintEnd_toEndOf="parent"
+    <LinearLayout
+        android:id="@+id/DoneCancelLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+        app:layout_constraintTop_toBottomOf="@+id/checkBox">
 
-    <Button
-        android:id="@+id/doneButtonPersonalExercise"
-        android:layout_width="150dp"
-        android:layout_height="49dp"
-        android:layout_marginTop="4dp"
-        android:background="@drawable/rectangle_for_edit_text"
-        android:text="Done"
-        app:layout_constraintStart_toStartOf="@+id/addPersonalExerciseButton"
-        app:layout_constraintTop_toBottomOf="@+id/addPersonalExerciseButton" />
+        <Button
+            android:id="@+id/doneButtonPersonalExercise"
+            android:layout_width="150dp"
+            android:layout_height="49dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="40dp"
+            android:background="@drawable/rectangle_for_edit_text"
+            android:text="Done"
+            app:layout_constraintTop_toBottomOf="@+id/rvWeekly" />
 
-    <Button
-        android:id="@+id/cancelButtonPersonalExercise"
-        android:layout_width="150dp"
-        android:layout_height="49dp"
-        android:layout_marginTop="4dp"
-        android:background="@drawable/rectangle_for_edit_text"
-        android:text="cancel"
-        app:layout_constraintEnd_toEndOf="@+id/addPersonalExerciseButton"
-        app:layout_constraintTop_toBottomOf="@+id/addPersonalExerciseButton" />
+        <Button
+            android:id="@+id/cancelButtonPersonalExercise"
+            android:layout_width="150dp"
+            android:layout_height="49dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/rectangle_for_edit_text"
+            android:text="cancel"
+            app:layout_constraintTop_toBottomOf="@+id/rvWeekly" />
+
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
