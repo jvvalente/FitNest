@@ -1,7 +1,5 @@
 package com.example.fitnest;
 
-import androidx.fragment.app.Fragment;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,19 +7,17 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.fitnest.adapters.AddDailyAdapter;
+import com.example.fitnest.adapters.AddWeeklyAdapter;
 import com.example.fitnest.adapters.WorkoutAdapter;
 
 import java.util.ArrayList;
 
-import devs.mulham.horizontalcalendar.HorizontalCalendar;
-
-public class addToPlanDaily extends Fragment {
+public class addToPlanWeekly extends Fragment {
 
     private EditText setNum;
     private EditText repNum;
@@ -29,9 +25,9 @@ public class addToPlanDaily extends Fragment {
     private Button doneButton;
     private Button cancelbutton;
     
-    RecyclerView rvdaily;
+    RecyclerView rvWeekly;
 
-    private ArrayList<DailyPlanItem> exerciseList;
+    private ArrayList<WeeklyPlanItem> exerciseList;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -83,22 +79,22 @@ public class addToPlanDaily extends Fragment {
     //temporaty function to hardcode some values
     //TODO: get the data from our database
     private void setexerciseList(){
-        exerciseList.add(new DailyPlanItem("Push Up"));
-        exerciseList.add(new DailyPlanItem("Tricep Pull Down"));
-        exerciseList.add(new DailyPlanItem("Bench Press"));
+        exerciseList.add(new WeeklyPlanItem("Push Up"));
+        exerciseList.add(new WeeklyPlanItem("Tricep Pull Down"));
+        exerciseList.add(new WeeklyPlanItem("Bench Press"));
     }
 
     private View setRecyclerView(View v){
         //Get reference to recycler view
-        rvdaily = (RecyclerView) v.findViewById(R.id.rvDaily);
+        rvWeekly = (RecyclerView) v.findViewById(R.id.rvWeekly);
         //set layout manager
-        rvdaily.setLayoutManager(new LinearLayoutManager(getActivity()));
+        rvWeekly.setLayoutManager(new LinearLayoutManager(getActivity()));
         //create an adapter
-        AddDailyAdapter dailyAdapter = new AddDailyAdapter(exerciseList);
+        AddWeeklyAdapter weeklyAdapter = new AddWeeklyAdapter(exerciseList);
         //set the adapter
-        rvdaily.setAdapter(dailyAdapter);
+        rvWeekly.setAdapter(weeklyAdapter);
         //set item animator to Default animator
-        rvdaily.setItemAnimator(new DefaultItemAnimator());
+        rvWeekly.setItemAnimator(new DefaultItemAnimator());
 
         return v;
     }

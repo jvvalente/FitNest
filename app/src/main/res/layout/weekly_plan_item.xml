@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/exerciseItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            >
+
+            <LinearLayout
+                android:id="@+id/weeklyForm"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="10dp"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/tvPart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Part _" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvExercise"
+                    android:layout_width="match_parent"
+                    android:layout_height="445dp"
+                    android:layout_below="@id/tvPart"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginBottom="0dp"
+                    app:layout_constraintTop_toBottomOf="@+id/tvPart" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/radioButtonLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/weeklyForm">
+
+                <RadioButton
+                    android:id="@+id/Sunday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="S"
+                    tools:layout_editor_absoluteX="29dp"
+                    tools:layout_editor_absoluteY="482dp" />
+                <RadioButton
+                    android:id="@+id/Monday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="M"
+                    tools:layout_editor_absoluteX="29dp"
+                    tools:layout_editor_absoluteY="482dp" />
+                <RadioButton
+                    android:id="@+id/Tuesday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="T"
+                    tools:layout_editor_absoluteX="29dp"
+                    tools:layout_editor_absoluteY="482dp" />
+                <RadioButton
+                    android:id="@+id/Wednesday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="W"
+                    tools:layout_editor_absoluteX="29dp"
+                    tools:layout_editor_absoluteY="482dp" />
+                <RadioButton
+                    android:id="@+id/Thursday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Th"
+                    tools:layout_editor_absoluteX="29dp"
+                    tools:layout_editor_absoluteY="482dp" />
+                <RadioButton
+                    android:id="@+id/Friday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="F"
+                    tools:layout_editor_absoluteX="29dp"
+                    tools:layout_editor_absoluteY="482dp" />
+                <RadioButton
+                    android:id="@+id/Saturday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="S"
+                    tools:layout_editor_absoluteX="29dp"
+                    tools:layout_editor_absoluteY="482dp" />
+
+            </LinearLayout>
+
+            <CheckBox
+                android:id="@+id/checkBox"
+                android:layout_width="109dp"
+                android:layout_height="47dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:text="Recurring?"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/radioButtonLayout" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>
