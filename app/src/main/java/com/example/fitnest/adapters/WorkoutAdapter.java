@@ -22,6 +22,10 @@ import com.google.android.youtube.player.YouTubePlayerView;
 import java.util.ArrayList;
 
 public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.ViewHolder>{
+    /*
+    Note to self- need to conver the YouTubePlayerView to YouTubePlayerFragment
+    https://www.androhub.com/implement-youtube-player-fragment-android-app/
+     */
     public static final String YOUTUBE_API_KEY = "AIzaSyAIF6220mZ2d1v53FU7cvOeSh2as1kmT44";
     Context context;
     private ArrayList<WorkoutItem> workoutList;
@@ -33,6 +37,7 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.ViewHold
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        Log.d("WorkoutAdapter", "onCreateViewHolder");
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_workout, parent, false);
         return new ViewHolder(view);
     }
@@ -55,10 +60,14 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.ViewHold
 
         TextView tvWorkoutType;
         TextView tvWorkoutInfo;
-        NumberPicker numberPicker;
+        TextView setsCompleted;
+        TextView repsCompleted;
+        NumberPicker numberPickerSets;
+        NumberPicker numberPickerReps;
         YouTubePlayerView youTubePlayerView;
         ConstraintLayout workoutItem;
         ConstraintLayout expandableLayout;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -78,37 +87,52 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.ViewHold
             });
         }
 
-        //sets the number picker
+        //sets both number picker
         private void setNumberPicker(View itemView) {
-            numberPicker = itemView.findViewById(R.id.numberPicker);
-            numberPicker.setMinValue(0);
-            numberPicker.setMaxValue(10);
-            numberPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            setsCompleted = itemView.findViewById(R.id.setsCompleted);
+            repsCompleted = itemView.findViewById(R.id.repsCompleted);
+
+            numberPickerSets = itemView.findViewById(R.id.numberPickerSets);
+            numberPickerSets.setMinValue(0);
+            numberPickerSets.setMaxValue(10);
+            numberPickerSets.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
                 @Override
                 public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                    setsCompleted.setText("" + newVal);
+                }
+            });
+
+            numberPickerReps = itemView.findViewById(R.id.numberPickerReps);
+            numberPickerReps.setMinValue(0);
+            numberPickerReps.setMaxValue(10);
+            numberPickerReps.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+                @Override
+                public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                    repsCompleted.setText("" + newVal);
                 }
             });
         }
 
-        /*
+/*
         //initalizes the YoutTubePlayerView
         private void initializeYouTube(View itemView){
             youTubePlayerView = itemView.findViewById(R.id.youtubePlayerView);
             youTubePlayerView.initialize(YOUTUBE_API_KEY, new YouTubePlayer.OnInitializedListener() {
                 @Override
                 public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
-                    Log.d("WorkoutFragment", "onInitializationSuccess");
+                    Log.d("WorkoutAdapter", "onInitializationSuccess");
+                    //do any work to play the video here, currently just playing a random video
                     youTubePlayer.cueVideo("tKodtNFpzBA");
                 }
 
                 @Override
                 public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
-                    Log.d("WorkoutFragment", "onInitializationFailure");
+                    Log.d("WorkoutAdapter", "onInitializationFailure");
                 }
             });
         }
 
-         */
+ */
     }
 }
 

@@ -105,8 +105,8 @@ public class HomeFragment extends Fragment {
 
         date.setText(currentDate);
 
-        Intent intent = new Intent(getContext(), PersonalPlans.class);
-        testButton = view.findViewById(R.id.button1);
+        //Intent intent = new Intent(getContext(), PersonalPlans.class);
+        //testButton = view.findViewById(R.id.button1);
 
         updateProgressBar();
         button_incr.setOnClickListener(new View.OnClickListener() {
@@ -130,12 +130,12 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        testButton.setOnClickListener(new View.OnClickListener() {
+        /*testButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(intent);
             }
-        });
+        });*/
     }
 
     private void updateProgressBar() {

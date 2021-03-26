@@ -1,14 +1,29 @@
 package com.example.fitnest;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
-public class AddPersonalPlans extends AppCompatActivity {
+import com.example.fitnest.adapters.PersonalPlansAdapter;
+import com.example.fitnest.adapters.WorkoutAdapter;
+
+import java.util.ArrayList;
+
+public class AddPersonalPlans extends AppCompatActivity  {
+
+    PersonalPlansAdapter adapter;
 
     private EditText workoutName;
     private EditText workoutInfo;
@@ -30,6 +45,18 @@ public class AddPersonalPlans extends AppCompatActivity {
         doneButton = findViewById(R.id.doneButtonAddPersonalExercise);
         cancelbutton = findViewById(R.id.cancelButtonAddPersonalExercise);
 
+
+
+
+        // set up the RecyclerView
+        /*RecyclerView recyclerView = findViewById(R.id.rvPersonalPlans);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new PersonalPlansAdapter(this, workoutNames);
+        //adapter.setClickListener(this);
+        recyclerView.setAdapter(adapter);*/
+
+       
+
         doneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,4 +74,13 @@ public class AddPersonalPlans extends AppCompatActivity {
         });
 
     }
+
+
+
+
+
+
+
+
+
 }
