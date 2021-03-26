@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubePlayerView;
 
-public class WorkoutItem  {
+public class WorkoutItem {
 
     //Workout Item functions
     YouTubePlayerView youTubePlayerView;
