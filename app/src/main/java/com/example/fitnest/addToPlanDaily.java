@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.fitnest.adapters.AddDailyAdapter;
 import com.example.fitnest.adapters.WorkoutAdapter;
 
 import java.util.ArrayList;
@@ -30,7 +31,7 @@ public class addToPlanDaily extends Fragment {
     
     RecyclerView rvdaily;
 
-    private ArrayList<WorkoutItem> exerciseList;
+    private ArrayList<DailyPlanItem> exerciseList;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -82,9 +83,9 @@ public class addToPlanDaily extends Fragment {
     //temporaty function to hardcode some values
     //TODO: get the data from our database
     private void setexerciseList(){
-        exerciseList.add(new WorkoutItem("Push Up"));
-        exerciseList.add(new WorkoutItem("Tricep Pull Down"));
-        exerciseList.add(new WorkoutItem("Bench Press"));
+        exerciseList.add(new DailyPlanItem("Push Up"));
+        exerciseList.add(new DailyPlanItem("Tricep Pull Down"));
+        exerciseList.add(new DailyPlanItem("Bench Press"));
     }
 
     private View setRecyclerView(View v){
@@ -93,9 +94,9 @@ public class addToPlanDaily extends Fragment {
         //set layout manager
         rvdaily.setLayoutManager(new LinearLayoutManager(getActivity()));
         //create an adapter
-        WorkoutAdapter workoutAdapter = new WorkoutAdapter(exerciseList);
+        AddDailyAdapter dailyAdapter = new AddDailyAdapter(exerciseList);
         //set the adapter
-        rvdaily.setAdapter(workoutAdapter);
+        rvdaily.setAdapter(dailyAdapter);
         //set item animator to Default animator
         rvdaily.setItemAnimator(new DefaultItemAnimator());
 
