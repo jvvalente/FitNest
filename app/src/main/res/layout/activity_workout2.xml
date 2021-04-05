@@ -33,8 +33,8 @@
 
 
     <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="300dp"
+        android:layout_width="416dp"
+        android:layout_height="253dp"
         android:layout_marginTop="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -45,8 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="vertical">
-        </LinearLayout>
+            android:orientation="vertical"></LinearLayout>
     </ScrollView>
 
     <TextView
@@ -63,8 +62,8 @@
         app:layout_constraintVertical_bias="0.503" />
 
     <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="300dp"
+        android:layout_width="411dp"
+        android:layout_height="273dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -73,36 +72,36 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center" >
+            android:gravity="center"
+            android:orientation="vertical">
 
             <Button
                 android:id="@+id/button"
                 android:layout_width="300dp"
                 android:layout_height="100dp"
-                android:text="3 day Full Body"
-                android:gravity="top" />
+                android:gravity="top"
+                android:text="3 day Full Body" />
 
             <Button
                 android:id="@+id/button2"
                 android:layout_width="300dp"
                 android:layout_height="100dp"
-                android:text="3 Day Push/Pull/legs"
-                android:gravity="top" />
+                android:gravity="top"
+                android:text="3 Day Push/Pull/legs" />
 
             <Button
                 android:id="@+id/button3"
                 android:layout_width="300dp"
                 android:layout_height="100dp"
-                android:text="4 Day Upper/Lower"
-                android:gravity="top" />
+                android:gravity="top"
+                android:text="4 Day Upper/Lower" />
 
             <Button
                 android:id="@+id/button4"
                 android:layout_width="300dp"
                 android:layout_height="100dp"
-                android:text="5 Day bro split"
-                android:gravity="top" />
+                android:gravity="top"
+                android:text="5 Day bro split" />
         </LinearLayout>
     </ScrollView>
 

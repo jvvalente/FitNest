@@ -44,10 +44,6 @@ public class PersonalPlans extends AppCompatActivity {
         doneButton = findViewById(R.id.doneButtonPersonalExercise);
         cancelButton = findViewById(R.id.cancelButtonPersonalExercise);
 
-        //Creates intent to send to add exercise activity
-        Intent intent = new Intent(this, AddPersonalPlans.class);
-        //Intent intentdone = new Intent(this, WorkoutFragment.class);
-
         ArrayList<String> workoutNames = new ArrayList<>();
         workoutNames.add("Push Up");
         workoutNames.add("Bench press");
@@ -68,26 +64,33 @@ public class PersonalPlans extends AppCompatActivity {
         addExerciseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                //sends user to the add exercise activity
-                startActivity(intent);
-
+                openAddExerciseActivity();
             }
         });
 
         doneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                sendBack();
             }
         });
 
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                sendBack();
             }
         });
 
+    }
+
+    public void openAddExerciseActivity(){
+        Intent intent = new Intent(this, AddPersonalPlans.class);
+        startActivity(intent);
+    }
+
+    public void sendBack(){
+        Intent intent = new Intent(this, WorkoutActivity2.class);
+        startActivity(intent);
     }
 }

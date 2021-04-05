@@ -126,7 +126,8 @@ public class WorkoutFragment extends Fragment {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.add_button:
-
+                Intent intent = new Intent(getContext(), WorkoutActivity2.class);
+                startActivity(intent);
             default:
                 return super.onOptionsItemSelected(item);
         }

@@ -43,11 +43,11 @@ public class MainActivity extends AppCompatActivity {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.settings_button:
-                //Intent intent = new Intent(this, SettingsFragment.class);
-                //startActivity(intent);
+                Intent intent = new Intent(this, SettingsFragment.class);
+                startActivity(intent);
                 return true;
             case R.id.add_button:
-                Intent intent1 = new Intent(this, PersonalPlans.class);
+                Intent intent1 = new Intent(this, WorkoutActivity2.class);
                 startActivity(intent1);
                 return true;
             default:
