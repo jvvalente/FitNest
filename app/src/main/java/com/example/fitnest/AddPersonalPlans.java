@@ -18,6 +18,9 @@ import android.widget.Toast;
 
 import com.example.fitnest.adapters.PersonalPlansAdapter;
 import com.example.fitnest.adapters.WorkoutAdapter;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.SaveCallback;
 
 import java.util.ArrayList;
 
@@ -39,29 +42,48 @@ public class AddPersonalPlans extends AppCompatActivity  {
         //Creates intent for going back to personal exercise page
         Intent intent = new Intent(this, PersonalPlans.class);
 
+        // Configure Query
+        ParseObject singleExercise = new ParseObject("SingleExercise");
+
         workoutName = findViewById(R.id.workoutName);
         workoutInfo = findViewById(R.id.workoutInfo);
         workoutETC = findViewById(R.id.workoutETC);
         doneButton = findViewById(R.id.doneButtonAddPersonalExercise);
         cancelbutton = findViewById(R.id.cancelButtonAddPersonalExercise);
 
-
-
-
-        // set up the RecyclerView
-        /*RecyclerView recyclerView = findViewById(R.id.rvPersonalPlans);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new PersonalPlansAdapter(this, workoutNames);
-        //adapter.setClickListener(this);
-        recyclerView.setAdapter(adapter);*/
-
-       
+        workoutName.setText("");
+        workoutInfo.setText("");
+        workoutETC.setText("");
 
         doneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //sends back to personal exercise page
-                startActivity(intent);
+
+                if(!workoutName.getText().toString().equals("") && !workoutInfo.getText().toString().equals("") && !workoutETC.getText().toString().equals("")){
+
+                    singleExercise.add("exerciseName", workoutName.getText().toString());
+                    singleExercise.add("workoutInfo", workoutInfo.getText().toString());
+                    singleExercise.add("etc", workoutETC.getText().toString());
+
+                    // Saving object
+                    singleExercise.saveInBackground(new SaveCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            if (e == null) {
+                                // Success
+                                //sends back to personal exercise page
+                                startActivity(intent);
+                            } else {
+                                // Error
+                                Toast.makeText(AddPersonalPlans.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                    });
+                }
+                else{
+                    Toast.makeText(AddPersonalPlans.this, "Missing information!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
