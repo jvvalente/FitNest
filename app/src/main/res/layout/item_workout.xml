@@ -33,8 +33,18 @@
                 android:layout_marginEnd="10dp"
                 android:src="@drawable/rectangle_home"
                 tools:ignore="MissingConstraints" />
-
 <!--
+            <fragment
+                android:name="com.google.android.youtube.player.YouTubePlayerSupportFragment"
+                android:id="@+id/youtubePlayerView"
+                android:layout_width="232dp"
+                android:layout_height="126dp"
+                android:layout_alignTop="@+id/ivBox"
+                android:layout_alignParentEnd="true"
+                tools:layout_editor_absoluteX="139dp"
+                tools:layout_editor_absoluteY="29dp"
+                tools:ignore="MissingConstraints" />
+
             <com.google.android.youtube.player.YouTubePlayerView
                 android:id="@+id/youtubePlayerView"
                 android:layout_width="232dp"
@@ -44,7 +54,7 @@
                 tools:layout_editor_absoluteX="139dp"
                 tools:layout_editor_absoluteY="29dp"
                 tools:ignore="MissingConstraints" />
--->
+     -->
             <TextView
                 android:id="@+id/tvWorkoutType"
                 android:layout_width="wrap_content"
