@@ -32,5 +32,6 @@ public class SettingsActivity extends AppCompatActivity {
         settingsIntake = findViewById(R.id.settingsIntake);
         settingsGoal = findViewById(R.id.settingsGoal);
 
+
     }
 }

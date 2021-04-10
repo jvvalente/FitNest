@@ -13,13 +13,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.parse.ParseUser;
 
 
 public class MainActivity extends AppCompatActivity {
 
-
-
-
+    private String username = "User";
+    private String password = "userpassword";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this,  R.id.fragment2);
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
 
+        //hardcoding the current user to be "User"
+        ParseUser.logInInBackground(username,password);
     }
 
     @Override
