@@ -73,7 +73,7 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.ViewHold
             super(itemView);
             tvWorkoutType = itemView.findViewById(R.id.tvWorkoutType);
             setNumberPicker(itemView);
-            //initializeYouTube(itemView);
+          //  initializeYouTube(itemView);
             workoutItem = itemView.findViewById(R.id.workoutItem);
             expandableLayout = itemView.findViewById(R.id.expandableLayout);
 
@@ -112,27 +112,24 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.ViewHold
                 }
             });
         }
-
-/*
-        //initalizes the YoutTubePlayerView
-        private void initializeYouTube(View itemView){
-            youTubePlayerView = itemView.findViewById(R.id.youtubePlayerView);
-            youTubePlayerView.initialize(YOUTUBE_API_KEY, new YouTubePlayer.OnInitializedListener() {
-                @Override
-                public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
-                    Log.d("WorkoutAdapter", "onInitializationSuccess");
-                    //do any work to play the video here, currently just playing a random video
-                    youTubePlayer.cueVideo("tKodtNFpzBA");
-                }
-
-                @Override
-                public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
-                    Log.d("WorkoutAdapter", "onInitializationFailure");
-                }
-            });
-        }
-
- */
+//
+//        //initalizes the YoutTubePlayerView
+//        private void initializeYouTube(View itemView){
+//            youTubePlayerView = itemView.findViewById(R.id.youtubePlayerView);
+//            youTubePlayerView.initialize(YOUTUBE_API_KEY, new YouTubePlayer.OnInitializedListener() {
+//                @Override
+//                public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
+//                    Log.d("WorkoutAdapter", "onInitializationSuccess");
+//                    //do any work to play the video here, currently just playing a random video
+//                    youTubePlayer.cueVideo("Eh00_rniF8E");
+//                }
+//
+//                @Override
+//                public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
+//                    Log.d("WorkoutAdapter", "onInitializationFailure");
+//                }
+//            });
+//        }
     }
 }
 
