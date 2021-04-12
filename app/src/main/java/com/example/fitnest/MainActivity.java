@@ -38,9 +38,6 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
 
         //hardcoding the current user to be "User"
-
-        Log.i(TAG,"hello");
-
         if (ParseUser.getCurrentUser() == null) {
             Log.i(TAG,"logging in the user");
             ParseUser user = new ParseUser();
@@ -57,9 +54,8 @@ public class MainActivity extends AppCompatActivity {
             });
         }
         else{
-            Log.i(TAG, ParseUser.getCurrentUser().getUsername());
+            Log.i(TAG, "The current user is " + ParseUser.getCurrentUser().getUsername());
         }
-        //Log.i("MainActivity", "The current user is " + ParseUser.getCurrentUser().getUsername());
     }
 
     @Override
