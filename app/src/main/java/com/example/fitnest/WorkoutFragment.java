@@ -88,7 +88,7 @@ public class WorkoutFragment extends Fragment {
         //set layout manager
         rvWorkout.setLayoutManager(new LinearLayoutManager(getActivity()));
         //create an adapter
-        WorkoutAdapter workoutAdapter = new WorkoutAdapter(workoutList);
+        WorkoutAdapter workoutAdapter = new WorkoutAdapter(getActivity(),workoutList);
         //set the adapter
         rvWorkout.setAdapter(workoutAdapter);
         //set item animator to Default animator

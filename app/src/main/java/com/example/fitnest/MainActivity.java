@@ -9,17 +9,25 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.parse.LogInCallback;
+import com.parse.Parse;
+import com.parse.ParseException;
 import com.parse.ParseUser;
+import com.parse.SignUpCallback;
 
 
 public class MainActivity extends AppCompatActivity {
 
     private String username = "User";
     private String password = "userpassword";
+    private String email = "useremail@gmail.com";
+    private String TAG = "MainActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +38,28 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
 
         //hardcoding the current user to be "User"
-        ParseUser.logInInBackground(username,password);
+
+        Log.i(TAG,"hello");
+
+        if (ParseUser.getCurrentUser() == null) {
+            Log.i(TAG,"logging in the user");
+            ParseUser user = new ParseUser();
+
+            user.logInInBackground(username, password, new LogInCallback() {
+                @Override
+                public void done(ParseUser user, ParseException e) {
+                    if (e != null) {
+                        Log.e(TAG, "Issue with login", e);
+                        return;
+                    }
+                    Log.i(TAG, "User sucessfully logged in");
+                }
+            });
+        }
+        else{
+            Log.i(TAG, ParseUser.getCurrentUser().getUsername());
+        }
+        //Log.i("MainActivity", "The current user is " + ParseUser.getCurrentUser().getUsername());
     }
 
     @Override

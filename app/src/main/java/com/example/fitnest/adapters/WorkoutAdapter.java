@@ -28,9 +28,10 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.ViewHold
      */
     public static final String YOUTUBE_API_KEY = "AIzaSyAIF6220mZ2d1v53FU7cvOeSh2as1kmT44";
     Context context;
-    private ArrayList<WorkoutItem> workoutList;
+    ArrayList<WorkoutItem> workoutList;
 
-    public WorkoutAdapter(ArrayList<WorkoutItem> workoutList){
+    public WorkoutAdapter(Context context, ArrayList<WorkoutItem> workoutList){
+        this.context = context;
         this.workoutList = workoutList;
     }
 
@@ -73,7 +74,7 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.ViewHold
             super(itemView);
             tvWorkoutType = itemView.findViewById(R.id.tvWorkoutType);
             setNumberPicker(itemView);
-          //  initializeYouTube(itemView);
+             //initializeYouTube(itemView);
             workoutItem = itemView.findViewById(R.id.workoutItem);
             expandableLayout = itemView.findViewById(R.id.expandableLayout);
 
@@ -112,7 +113,7 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.ViewHold
                 }
             });
         }
-//
+
 //        //initalizes the YoutTubePlayerView
 //        private void initializeYouTube(View itemView){
 //            youTubePlayerView = itemView.findViewById(R.id.youtubePlayerView);

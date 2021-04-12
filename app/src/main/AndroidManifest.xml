@@ -13,6 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FitNest">
+        android:usesCleartextTraffic="true"
         <activity android:name=".WorkoutActivity2"></activity>
 
         <receiver android:name=".WaterWidget">
