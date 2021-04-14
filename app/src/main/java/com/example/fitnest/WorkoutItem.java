@@ -12,9 +12,7 @@ import com.google.android.youtube.player.YouTubePlayerView;
 
 public class WorkoutItem {
 
-    //Workout Item functions
-    YouTubePlayerView youTubePlayerView;
-    private String workoutType;
+    public String workoutType, workoutInfo, videoID;
     private boolean expanded;
 
     public boolean isExpanded() {
@@ -25,24 +23,35 @@ public class WorkoutItem {
         this.expanded = expanded;
     }
 
-    public WorkoutItem(String workoutType) {
+    public WorkoutItem(){ }
+
+    public WorkoutItem(String workoutType, String workoutInfo, String videoID) {
         this.workoutType = workoutType;
-        this.expanded = false;
+        this.workoutInfo = workoutInfo;
+        this.videoID = videoID;
     }
 
     public String getWorkoutType() {
         return workoutType;
     }
 
-    public YouTubePlayerView getYouTubePlayerView() {
-        return youTubePlayerView;
-    }
-
     public void setWorkoutType(String workoutType) {
         this.workoutType = workoutType;
     }
 
-    public void setNumberPicker(){
+    public String getWorkoutInfo() {
+        return workoutInfo;
+    }
 
+    public void setWorkoutInfo(String workoutInfo) {
+        this.workoutInfo = workoutInfo;
+    }
+
+    public String getVideoID() {
+        return videoID;
+    }
+
+    public void setVideoID(String videoID) {
+        this.videoID = videoID;
     }
 }

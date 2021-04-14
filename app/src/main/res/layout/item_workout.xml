@@ -15,7 +15,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/workoutItem"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -54,7 +54,19 @@
                 tools:layout_editor_absoluteX="139dp"
                 tools:layout_editor_absoluteY="29dp"
                 tools:ignore="MissingConstraints" />
--->
+            -->
+
+            <WebView
+                android:id="@+id/webView"
+                android:layout_width="232dp"
+                android:layout_height="126dp"
+                android:layout_alignTop="@+id/ivBox"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="36dp"
+                app:layout_constraintStart_toEndOf="@+id/tvWorkoutInfo"
+                app:layout_constraintTop_toTopOf="@+id/ivBox"
+                tools:ignore="MissingConstraints" />
+
             <TextView
                 android:id="@+id/tvWorkoutType"
                 android:layout_width="wrap_content"
