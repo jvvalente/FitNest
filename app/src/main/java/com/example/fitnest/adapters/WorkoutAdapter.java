@@ -48,7 +48,7 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.ViewHold
         String workoutInfo = workoutList.get(position).getWorkoutInfo();
 
         holder.tvWorkoutType.setText(workout);
-        holder.tvWorkoutInfo.setText(workoutInfo);
+        //holder.tvWorkoutInfo.setText(workoutInfo);
 
         holder.webView.loadData(workoutList.get(position).getVideoID(),"text/html","utf-8");
 
