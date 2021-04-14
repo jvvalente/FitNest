@@ -5,6 +5,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebChromeClient;
+import android.webkit.WebView;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,10 +24,7 @@ import com.google.android.youtube.player.YouTubePlayerView;
 import java.util.ArrayList;
 
 public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.ViewHolder>{
-    /*
-    Note to self- need to conver the YouTubePlayerView to YouTubePlayerFragment
-    https://www.androhub.com/implement-youtube-player-fragment-android-app/
-     */
+
     public static final String YOUTUBE_API_KEY = "AIzaSyAIF6220mZ2d1v53FU7cvOeSh2as1kmT44";
     Context context;
     ArrayList<WorkoutItem> workoutList;
@@ -46,7 +45,12 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         String workout = workoutList.get(position).getWorkoutType();
+        String workoutInfo = workoutList.get(position).getWorkoutInfo();
+
         holder.tvWorkoutType.setText(workout);
+        //holder.tvWorkoutInfo.setText(workoutInfo);
+
+        holder.webView.loadData(workoutList.get(position).getVideoID(),"text/html","utf-8");
 
         boolean isExpanded = workoutList.get(position).isExpanded();
         holder.expandableLayout.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
@@ -61,6 +65,8 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.ViewHold
 
         TextView tvWorkoutType;
         TextView tvWorkoutInfo;
+        WebView webView;
+
         TextView setsCompleted;
         TextView repsCompleted;
         NumberPicker numberPickerSets;
@@ -77,6 +83,13 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.ViewHold
              //initializeYouTube(itemView);
             workoutItem = itemView.findViewById(R.id.workoutItem);
             expandableLayout = itemView.findViewById(R.id.expandableLayout);
+            webView = itemView.findViewById(R.id.webView);
+
+            //webview stuff
+            webView.getSettings().setJavaScriptEnabled(true);
+            webView.setWebChromeClient(new WebChromeClient());
+            //webView.loadUrl()
+
 
             workoutItem.setOnClickListener(new View.OnClickListener() {
                 @Override
