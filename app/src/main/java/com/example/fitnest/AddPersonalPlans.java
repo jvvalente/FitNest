@@ -29,41 +29,47 @@ public class AddPersonalPlans extends AppCompatActivity  {
     PersonalPlansAdapter adapter;
 
     private EditText workoutName;
-    private EditText workoutInfo;
-    private EditText workoutETC;
+    private EditText workoutSets;
+    private EditText workoutReps;
+    private EditText workoutYtID;
     private Button doneButton;
     private Button cancelbutton;
+
+    String tableName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_personal_plans);
 
-        //Creates intent for going back to personal exercise page
-        Intent intent = new Intent(this, PersonalPlans.class);
+        Bundle bundle = getIntent().getExtras();
+        tableName = bundle.getString("tableName");
 
         // Configure Query
-        ParseObject singleExercise = new ParseObject("SingleExercise");
+        ParseObject singleExercise = new ParseObject(tableName);
 
         workoutName = findViewById(R.id.workoutName);
-        workoutInfo = findViewById(R.id.workoutInfo);
-        workoutETC = findViewById(R.id.workoutETC);
+        workoutSets = findViewById(R.id.workoutSets);
+        workoutReps = findViewById(R.id.workoutReps);
+        workoutYtID = findViewById(R.id.workoutYtId);
         doneButton = findViewById(R.id.doneButtonAddPersonalExercise);
         cancelbutton = findViewById(R.id.cancelButtonAddPersonalExercise);
 
         workoutName.setText("");
-        workoutInfo.setText("");
-        workoutETC.setText("");
+        workoutSets.setText("");
+        workoutReps.setText("");
+        workoutYtID.setText("");
 
         doneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(!workoutName.getText().toString().equals("") && !workoutInfo.getText().toString().equals("") && !workoutETC.getText().toString().equals("")){
+                if(!workoutName.getText().toString().equals("") && !workoutSets.getText().toString().equals("") && !workoutReps.getText().toString().equals("") && !workoutYtID.getText().toString().equals("")){
 
                     singleExercise.add("exerciseName", workoutName.getText().toString());
-                    singleExercise.add("workoutInfo", workoutInfo.getText().toString());
-                    singleExercise.add("etc", workoutETC.getText().toString());
+                    singleExercise.add("workoutSets", workoutSets.getText().toString());
+                    singleExercise.add("workoutReps", workoutReps.getText().toString());
+                    singleExercise.add("workoutYtID", workoutYtID.getText().toString());
 
                     // Saving object
                     singleExercise.saveInBackground(new SaveCallback() {
@@ -72,7 +78,7 @@ public class AddPersonalPlans extends AppCompatActivity  {
                             if (e == null) {
                                 // Success
                                 //sends back to personal exercise page
-                                startActivity(intent);
+                                sendBack();
                             } else {
                                 // Error
                                 Toast.makeText(AddPersonalPlans.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -91,10 +97,17 @@ public class AddPersonalPlans extends AppCompatActivity  {
             @Override
             public void onClick(View v) {
                 //sends back to personal exercise page
-                startActivity(intent);
+                sendBack();
             }
         });
 
+    }
+
+    private void sendBack(){
+        //Creates intent for going back to personal exercise page
+        Intent intent = new Intent(this, PersonalPlans.class);
+        intent.putExtra("WorkoutGroupName", tableName);
+        startActivity(intent);
     }
 
 

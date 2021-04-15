@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.fitnest.adapters.PersonalPlansAdapter;
@@ -28,6 +29,8 @@ public class PersonalPlans extends AppCompatActivity {
 
     PersonalPlansAdapter adapter;
 
+    private TextView nameOfGroup;
+
     private Button addExerciseButton;
     private Button doneButton;
     private Button cancelButton;
@@ -42,12 +45,19 @@ public class PersonalPlans extends AppCompatActivity {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
+    String workoutGroupName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_plans);
 
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("SingleExercise");
+        Bundle bundle = getIntent().getExtras();
+        if(bundle!=null){
+            workoutGroupName = bundle.getString("WorkoutGroupName");
+        }
+
+        ParseQuery<ParseObject> query = ParseQuery.getQuery(workoutGroupName);
         query.selectKeys(Arrays.asList("exerciseName"));
         query.addDescendingOrder("exerciseName");
 
@@ -57,9 +67,13 @@ public class PersonalPlans extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        nameOfGroup = findViewById(R.id.textViewGroup);
+
         addExerciseButton = findViewById(R.id.addPersonalExerciseButton);
         doneButton = findViewById(R.id.doneButtonPersonalExercise);
         cancelButton = findViewById(R.id.cancelButtonPersonalExercise);
+
+        nameOfGroup.setText(workoutGroupName);
 
         ArrayList<String> workoutNames = new ArrayList<>();
         /*workoutNames.add("Push Up");
@@ -103,12 +117,10 @@ public class PersonalPlans extends AppCompatActivity {
         //adapter.setClickListener(this);
         recyclerView.setAdapter(adapter);*/
 
-
-
         addExerciseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openAddExerciseActivity();
+                openAddExerciseActivity(workoutGroupName);
             }
         });
 
@@ -137,8 +149,9 @@ public class PersonalPlans extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
-    public void openAddExerciseActivity(){
+    public void openAddExerciseActivity(String name){
         Intent intent = new Intent(this, AddPersonalPlans.class);
+        intent.putExtra("tableName", name);
         startActivity(intent);
     }
 

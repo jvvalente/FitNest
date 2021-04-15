@@ -53,21 +53,21 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="14dp"
         android:layout_marginTop="12dp"
-        android:layout_marginEnd="317dp"
-        android:text="Workout Info"
+        android:layout_marginEnd="274dp"
+        android:text="Workout repetitions"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/workoutName" />
 
     <EditText
-        android:id="@+id/workoutInfo"
+        android:id="@+id/workoutReps"
         android:layout_width="match_parent"
         android:layout_height="42dp"
         android:layout_marginStart="14dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="14dp"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -80,14 +80,42 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="12dp"
-        android:layout_marginEnd="364dp"
-        android:text="etc..."
+        android:layout_marginEnd="312dp"
+        android:text="Workout sets"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/workoutInfo" />
+        app:layout_constraintTop_toBottomOf="@+id/workoutReps" />
 
     <EditText
-        android:id="@+id/workoutETC"
+        android:id="@+id/workoutSets"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="14dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewWorkoutETC"
+        android:background="@drawable/rectangle_for_edit_text"/>
+
+    <TextView
+        android:id="@+id/textViewYtID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="364dp"
+        android:text="Youtube ID"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/workoutSets" />
+
+    <EditText
+        android:id="@+id/workoutYtId"
         android:layout_width="match_parent"
         android:layout_height="42dp"
         android:layout_marginStart="14dp"
@@ -98,39 +126,41 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewWorkoutETC"
+        app:layout_constraintTop_toBottomOf="@+id/textViewYtID"
         android:background="@drawable/rectangle_for_edit_text"/>
 
     <LinearLayout
         android:layout_width="389dp"
         android:layout_height="53dp"
         android:layout_marginStart="14dp"
-        android:layout_marginTop="164dp"
+        android:layout_marginTop="231dp"
         android:layout_marginEnd="14dp"
-        android:layout_marginBottom="64dp"
+        android:layout_marginBottom="80dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/workoutETC">
+        app:layout_constraintTop_toBottomOf="@+id/workoutYtId">
 
         <Button
             android:id="@+id/doneButtonAddPersonalExercise"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Done"
-            android:background="@drawable/rectangle_for_edit_text"/>
+            android:background="@drawable/rectangle_for_edit_text"
+            android:text="Done" />
 
         <Button
             android:id="@+id/cancelButtonAddPersonalExercise"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Cancel"
-            android:background="@drawable/rectangle_for_edit_text"/>
+            android:background="@drawable/rectangle_for_edit_text"
+            android:text="Cancel" />
     </LinearLayout>
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
