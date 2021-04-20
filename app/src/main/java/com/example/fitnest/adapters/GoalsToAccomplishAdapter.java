@@ -14,43 +14,66 @@ import com.example.fitnest.ToAccomplishItem;
 import com.example.fitnest.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class GoalsToAccomplishAdapter extends RecyclerView.Adapter<GoalsToAccomplishAdapter.ViewHolder>{
-    Context context;
-    private ArrayList<ToAccomplishItem> accomplishmentList;
 
-    public GoalsToAccomplishAdapter(ArrayList<ToAccomplishItem> accomplishmentList){
-        this.accomplishmentList = accomplishmentList;
-    }
+    private List<String> mData;
+    private LayoutInflater mInflater;
+    private ItemClickListener mClickListener;
 
-    @NonNull
-    @Override
-    public GoalsToAccomplishAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.accomplished_goals, parent, false);
-        return new GoalsToAccomplishAdapter.ViewHolder(view);
+    public GoalsToAccomplishAdapter(Context context, List<String> data){
+        this.mInflater = LayoutInflater.from(context);
+        this.mData = data;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull GoalsToAccomplishAdapter.ViewHolder holder, int position) {
-        String acc = accomplishmentList.get(position).getAccomplishment();
-        holder.tvAccomplishmentTo.setText(acc);
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = mInflater.inflate(R.layout.goals_to_accomplish, parent, false);
+        return new ViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        String animal = mData.get(position);
+        holder.myTextView.setText(animal);
     }
 
     @Override
     public int getItemCount() {
-        return accomplishmentList.size();
+        return mData.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        TextView myTextView;
 
-        TextView tvAccomplishmentTo;
-        ConstraintLayout accomplishmentItem;
-
-        public ViewHolder(@NonNull View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
-            tvAccomplishmentTo = itemView.findViewById(R.id.tvAccomplishmentTo);
-            accomplishmentItem = itemView.findViewById(R.id.accomplishmentTo);
+            myTextView = itemView.findViewById(R.id.tvAccomplishmentTo);
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View view) {
+            if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
+            System.out.println("This works!" + getAdapterPosition() + " " + getItem(getAdapterPosition()));
+
+
+        }
+    }
+
+    String getItem(int id) {
+        return mData.get(id);
+    }
+
+    // allows clicks events to be caught
+    void setClickListener(ItemClickListener itemClickListener) {
+        this.mClickListener = itemClickListener;
+    }
+
+    // parent activity will implement this method to respond to click events
+    public interface ItemClickListener {
+        void onItemClick(View view, int position);
     }
 }
 
