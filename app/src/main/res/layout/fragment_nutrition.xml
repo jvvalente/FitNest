@@ -25,8 +25,8 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="134dp"
-        android:layout_marginTop="68dp"
+        android:layout_marginStart="127dp"
+        android:layout_marginTop="72dp"
         android:autoSizeTextType="uniform"
         android:text="Nutrition" />
 
@@ -39,13 +39,19 @@
         android:layout_marginTop="191dp"
         android:text="Add a Meal" />
 
-    <Spinner
-        android:id="@+id/spinner1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="337dp"
-        android:text="TextView" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="247dp"
+        android:layout_marginEnd="-1dp"
+        android:layout_marginBottom="-2dp" />
+
+    
 
 </RelativeLayout>
