@@ -77,9 +77,9 @@ public class WorkoutFragment extends Fragment {
     //temporaty function to hardcode some values
     //TODO: get the data from our database
     private void setWorkoutList(){
-        workoutList.add(new WorkoutItem("pushup"));
-        workoutList.add(new WorkoutItem("sit up"));
-        workoutList.add(new WorkoutItem("weights"));
+        workoutList.add(new WorkoutItem("pushup","do a pushup","<iframe width=\"100%\" height=\"100%\" src=\"" + String.format("https://www.youtube.com/embed/%s","IODxDxX7oi4") + "\" frameborder=\"0\" allowfullscreen><iframe>" ));
+        workoutList.add(new WorkoutItem("sit up","Do a situp","<iframe width=\"100%\" height=\"100%\" src=\"" + String.format("https://www.youtube.com/embed/%s","1fbU_MkV7NE") + "\" frameborder=\"0\" allowfullscreen><iframe>" ));
+        workoutList.add(new WorkoutItem("weights","do dumbell curl ups","<iframe width=\"100%\" height=\"100%\" src=\"" + String.format("https://www.youtube.com/embed/%s","av7-8igSXTs") + "\" frameborder=\"0\" allowfullscreen><iframe>" ));
     }
 
     private View setRecyclerView(View v){
