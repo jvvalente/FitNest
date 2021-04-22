@@ -29,7 +29,7 @@ public class GoalsToAccomplishAdapter extends RecyclerView.Adapter<GoalsToAccomp
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Log.d("GoalsToAccomplishAdapter", "onCreateViewHolder");
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.accomplished_goals, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.goals_to_accomplish, parent, false);
         return new ViewHolder(view);
     }
 
