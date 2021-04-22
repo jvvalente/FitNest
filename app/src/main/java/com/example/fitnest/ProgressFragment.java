@@ -57,43 +57,40 @@ public class ProgressFragment extends Fragment {
         setHasOptionsMenu(true);
 
         goalsList = new ArrayList<>();
-        setGoalsList();
-
-        v = setRecyclerView(v);
-
-        return v;
-    }
-
-    private void setGoalsList(){
 
         ParseQuery<ParseObject> query = ParseQuery.getQuery("GoalsToAccomplish");
         query.selectKeys(Arrays.asList("Goal"));
         query.addAscendingOrder("Goal");
         goalsList.add(new ToAccomplishItem("GoalThree"));
-        query.findInBackground(new FindCallback<ParseObject>() {
 
-            @Override
-            public void done(List<ParseObject> objects, ParseException e) {
-                if (e == null) {
+            query.findInBackground(new FindCallback<ParseObject>() {
 
-                    goalsList.add(new ToAccomplishItem("GoalTwo"));
+                @Override
+                public void done(List<ParseObject> objects, ParseException e) {
+                    if (e == null) {
 
-                    for (ParseObject o : objects) {
-                        System.out.println("ParseObject: " + o.get("Goal"));
-//                        goalsList.add(new ToAccomplishItem(o.get("Goal").toString()));
-                        goalsList.add(new ToAccomplishItem("GoalOne"));
+                        goalsList.add(new ToAccomplishItem("GoalTwo"));
+
+                        for (ParseObject o : objects) {
+                            System.out.println("ParseObject: " + o.get("Goal"));
+                        goalsList.add(new ToAccomplishItem(o.get("Goal").toString()));
+//                            goalsList.add(new ToAccomplishItem("GoalOne"));
+                        }
+
+                    } else {
+                        // Something is wrong}
+//                        goalsList.add(new ToAccomplishItem("GoalFour"));
                     }
-
-                } else {
-                    // Something is wrong}
-                    goalsList.add(new ToAccomplishItem("GoalFour"));
                 }
-            }
-        });
+            });
 
-//        goalsList.add(new ToAccomplishItem("hello" ));
-//        goalsList.add(new ToAccomplishItem("hello2"));
-//        goalsList.add(new ToAccomplishItem("hello3"));
+//        setGoalsList();
+
+        goalsList.add(new ToAccomplishItem("GoalFinal"));
+
+        v = setRecyclerView(v);
+
+        return v;
     }
 
     private View setRecyclerView(View v){
@@ -102,7 +99,7 @@ public class ProgressFragment extends Fragment {
         //set layout manager
         rvGoalsTo.setLayoutManager(new LinearLayoutManager(getActivity()));
         //create an adapter
-        GoalsToAccomplishAdapter goalsAdapter = new GoalsToAccomplishAdapter(getActivity(),goalsList);
+        GoalsToAccomplishAdapter goalsAdapter = new GoalsToAccomplishAdapter(getActivity(), goalsList);
         //set the adapter
         rvGoalsTo.setAdapter(goalsAdapter);
         //set item animator to Default animator
