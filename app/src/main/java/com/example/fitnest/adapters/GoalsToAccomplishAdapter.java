@@ -1,6 +1,7 @@
 package com.example.fitnest.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,19 +20,21 @@ public class GoalsToAccomplishAdapter extends RecyclerView.Adapter<GoalsToAccomp
     Context context;
     private ArrayList<ToAccomplishItem> accomplishmentList;
 
-    public GoalsToAccomplishAdapter(ArrayList<ToAccomplishItem> accomplishmentList){
+    public GoalsToAccomplishAdapter(Context context, ArrayList<ToAccomplishItem> accomplishmentList){
+        this.context = context;
         this.accomplishmentList = accomplishmentList;
     }
 
     @NonNull
     @Override
-    public GoalsToAccomplishAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        Log.d("GoalsToAccomplishAdapter", "onCreateViewHolder");
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.accomplished_goals, parent, false);
-        return new GoalsToAccomplishAdapter.ViewHolder(view);
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull GoalsToAccomplishAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         String acc = accomplishmentList.get(position).getAccomplishment();
         holder.tvAccomplishmentTo.setText(acc);
     }
