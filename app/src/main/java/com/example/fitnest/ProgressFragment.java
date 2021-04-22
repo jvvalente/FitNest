@@ -19,8 +19,16 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.example.fitnest.adapters.GoalsToAccomplishAdapter;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+import com.parse.SaveCallback;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class ProgressFragment extends Fragment {
 
@@ -57,9 +65,35 @@ public class ProgressFragment extends Fragment {
     }
 
     private void setGoalsList(){
-        goalsList.add(new ToAccomplishItem("hello" ));
-        goalsList.add(new ToAccomplishItem("hello2"));
-        goalsList.add(new ToAccomplishItem("hello3"));
+
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("GoalsToAccomplish");
+        query.selectKeys(Arrays.asList("Goal"));
+        query.addAscendingOrder("Goal");
+        goalsList.add(new ToAccomplishItem("GoalThree"));
+        query.findInBackground(new FindCallback<ParseObject>() {
+
+            @Override
+            public void done(List<ParseObject> objects, ParseException e) {
+                if (e == null) {
+
+                    goalsList.add(new ToAccomplishItem("GoalTwo"));
+
+                    for (ParseObject o : objects) {
+                        System.out.println("ParseObject: " + o.get("Goal"));
+//                        goalsList.add(new ToAccomplishItem(o.get("Goal").toString()));
+                        goalsList.add(new ToAccomplishItem("GoalOne"));
+                    }
+
+                } else {
+                    // Something is wrong}
+                    goalsList.add(new ToAccomplishItem("GoalFour"));
+                }
+            }
+        });
+
+//        goalsList.add(new ToAccomplishItem("hello" ));
+//        goalsList.add(new ToAccomplishItem("hello2"));
+//        goalsList.add(new ToAccomplishItem("hello3"));
     }
 
     private View setRecyclerView(View v){
