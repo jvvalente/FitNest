@@ -41,8 +41,8 @@ public class HomeExerciseAdapter extends RecyclerView.Adapter<HomeExerciseAdapte
     public void onBindViewHolder(ViewHolder holder, int position) {
         SingleExercise animal = mData.get(position);
         holder.myTextView.setText(animal.getExerciseName());
-        holder.Sets.setText("Sets: " );
-        holder.Reps.setText("Reps: " );
+        holder.Sets.setText("Sets: " + animal.getExeeciseSets());
+        holder.Reps.setText("Reps: " + animal.getExerciseReps());
     }
 
     // total number of rows
