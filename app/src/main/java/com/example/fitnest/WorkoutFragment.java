@@ -26,6 +26,8 @@ import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerFragment;
 import com.google.android.youtube.player.YouTubePlayerView;
+import com.parse.ParseInstallation;
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -34,11 +36,13 @@ import devs.mulham.horizontalcalendar.HorizontalCalendar;
 import devs.mulham.horizontalcalendar.utils.HorizontalCalendarListener;
 
 public class WorkoutFragment extends Fragment {
-
+    ParseUser user;
     HorizontalCalendar horizontalCalendar;
     RecyclerView rvWorkout;
 
     private ArrayList<WorkoutItem> workoutList;
+
+    private ArrayList<ArrayList<WorkoutItem>> workoutArray;
 
     public WorkoutFragment() {
         // Required empty public constructor
@@ -62,11 +66,34 @@ public class WorkoutFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_workout, container, false);
         setHasOptionsMenu(true);
 
-        workoutList = new ArrayList<>();
-        setWorkoutList();
+        user = ParseUser.getCurrentUser();
+
+
+        /* starts before 1 month from now */
+        Calendar startDate = Calendar.getInstance();
+        startDate.add(Calendar.MONTH, -1);
+
+        /* ends after 1 month from now */
+        Calendar endDate = Calendar.getInstance();
+        endDate.add(Calendar.MONTH, 1);
+
+        horizontalCalendar = new HorizontalCalendar.Builder(v, R.id.calendarView)
+                .range(startDate, endDate)
+                .datesNumberOnScreen(5)
+                .build();
+
+        workoutArray = new ArrayList<>();
+        for(int i = 0; i<100; i++){
+            workoutArray.add(new ArrayList<>());
+        }
+
+
+
+//        workoutList = new ArrayList<>();
+        //setWorkoutList();
 
         //sets up the RecyclerView and it's adapter
-        v = setRecyclerView(v);
+        //v = setRecyclerView(v);
 
         //sets up the HorizontalCalendar
         v = setHorizontalCalendar(v);
@@ -74,12 +101,14 @@ public class WorkoutFragment extends Fragment {
         return v;
     }
 
-    //temporaty function to hardcode some values
+    //temporary function to hardcode some values
     //TODO: get the data from our database
     private void setWorkoutList(){
-        workoutList.add(new WorkoutItem("pushup","do a pushup","<iframe width=\"100%\" height=\"100%\" src=\"" + String.format("https://www.youtube.com/embed/%s","IODxDxX7oi4") + "\" frameborder=\"0\" allowfullscreen><iframe>" ));
-        workoutList.add(new WorkoutItem("sit up","Do a situp","<iframe width=\"100%\" height=\"100%\" src=\"" + String.format("https://www.youtube.com/embed/%s","1fbU_MkV7NE") + "\" frameborder=\"0\" allowfullscreen><iframe>" ));
-        workoutList.add(new WorkoutItem("weights","do dumbell curl ups","<iframe width=\"100%\" height=\"100%\" src=\"" + String.format("https://www.youtube.com/embed/%s","av7-8igSXTs") + "\" frameborder=\"0\" allowfullscreen><iframe>" ));
+        int index = (int)user.get("dateIndex");
+        Log.i("WorkoutFragment","date index = " + index);
+        workoutArray.get(35).add(new WorkoutItem("pushup","do a pushup","<iframe width=\"100%\" height=\"100%\" src=\"" + String.format("https://www.youtube.com/embed/%s","IODxDxX7oi4") + "\" frameborder=\"0\" allowfullscreen><iframe>" ));
+        workoutArray.get(35).add(new WorkoutItem("sit up","Do a situp","<iframe width=\"100%\" height=\"100%\" src=\"" + String.format("https://www.youtube.com/embed/%s","1fbU_MkV7NE") + "\" frameborder=\"0\" allowfullscreen><iframe>" ));
+        workoutArray.get(35).add(new WorkoutItem("weights","do dumbell curl ups","<iframe width=\"100%\" height=\"100%\" src=\"" + String.format("https://www.youtube.com/embed/%s","av7-8igSXTs") + "\" frameborder=\"0\" allowfullscreen><iframe>" ));
     }
 
     private View setRecyclerView(View v){
@@ -98,23 +127,45 @@ public class WorkoutFragment extends Fragment {
     }
 
     private View setHorizontalCalendar(View v){
-        /* starts before 1 month from now */
-        Calendar startDate = Calendar.getInstance();
-        startDate.add(Calendar.MONTH, -1);
-
-        /* ends after 1 month from now */
-        Calendar endDate = Calendar.getInstance();
-        endDate.add(Calendar.MONTH, 1);
-
-        horizontalCalendar = new HorizontalCalendar.Builder(v, R.id.calendarView)
-                .range(startDate, endDate)
-                .datesNumberOnScreen(5)
-                .build();
+//        /* starts before 1 month from now */
+//        Calendar startDate = Calendar.getInstance();
+//        startDate.add(Calendar.MONTH, -1);
+//
+//        /* ends after 1 month from now */
+//        Calendar endDate = Calendar.getInstance();
+//        endDate.add(Calendar.MONTH, 1);
+//
+//        horizontalCalendar = new HorizontalCalendar.Builder(v, R.id.calendarView)
+//                .range(startDate, endDate)
+//                .datesNumberOnScreen(5)
+//                .build();
+//
+//        horizontalCalendar.getSelectedDatePosition();
 
         horizontalCalendar.setCalendarListener(new HorizontalCalendarListener() {
             @Override
             public void onDateSelected(Calendar date, int position) {
-                //do something
+                user.put("dateIndex",position);
+                setWorkoutList();
+                //Get reference to recycler view
+                rvWorkout = (RecyclerView) v.findViewById(R.id.rvWorkout);
+                //set layout manager
+                rvWorkout.setLayoutManager(new LinearLayoutManager(getActivity()));
+                //create an adapter
+                WorkoutAdapter workoutAdapter = new WorkoutAdapter(getActivity(),workoutArray.get(position));
+                //set the adapter
+                rvWorkout.setAdapter(workoutAdapter);
+                //set item animator to Default animator
+                rvWorkout.setItemAnimator(new DefaultItemAnimator());
+
+                String pos = "" + position;
+                Toast.makeText(getContext(), pos, Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public boolean onDateLongClicked(Calendar date, int position){
+                Toast.makeText(getContext(), "hi", Toast.LENGTH_LONG).show();
+                return true;
             }
         });
 

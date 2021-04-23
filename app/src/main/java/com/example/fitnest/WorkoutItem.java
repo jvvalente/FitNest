@@ -23,7 +23,11 @@ public class WorkoutItem {
         this.expanded = expanded;
     }
 
-    public WorkoutItem(){ }
+    public WorkoutItem(){
+        this.workoutType = "unknown";
+        this.workoutInfo = "unknown";
+        this.videoID = "unknown";
+    }
 
     public WorkoutItem(String workoutType, String workoutInfo, String videoID) {
         this.workoutType = workoutType;
