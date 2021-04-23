@@ -44,13 +44,12 @@
             app:layout_constraintVertical_bias="0.077"
             android:progressDrawable="@drawable/circle"/>
 
-        <TextView
-            android:id="@+id/date_textview"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerHome"
             android:layout_width="300dp"
             android:layout_height="200dp"
             android:gravity="center_horizontal"
-            android:text="TextView"
-            android:textSize="30dp"
+            android:layout_gravity="center"
             android:textColor="@color/black"
             android:background="@drawable/rectangle_home"
             app:layout_constraintBottom_toTopOf="@+id/button_incr"

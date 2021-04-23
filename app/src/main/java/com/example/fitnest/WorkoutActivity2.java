@@ -46,8 +46,6 @@ public class WorkoutActivity2 extends AppCompatActivity implements PersonalPlans
 
     Context context;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
