@@ -16,8 +16,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.fitnest.adapters.AccomplishedGoalsAdapter;
 import com.example.fitnest.adapters.GoalsToAccomplishAdapter;
@@ -43,6 +46,9 @@ public class ProgressFragment extends Fragment {
     private ArrayList<ToAccomplishItem> goalsList;
     private ArrayList<AccomplishedItem> goalsListDone;
 
+    EditText addGoal;
+    Button addGoalButton;
+
     public ProgressFragment() {
         // Required empty public constructor
     }
@@ -56,13 +62,19 @@ public class ProgressFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); }
+    public void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState);
+
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_progress, container, false);
         setHasOptionsMenu(true);
+
+        addGoal = v.findViewById(R.id.editTextAddGoal);
+        addGoalButton = v.findViewById(R.id.buttonAddGoal);
 
         ParseQuery<ParseObject> count = ParseQuery.getQuery("AccomplishedGoals");
         count.selectKeys(Arrays.asList("Points"));
@@ -125,6 +137,30 @@ public class ProgressFragment extends Fragment {
                 } else {
                     // Something is wrong}
                 }
+            }
+        });
+
+        addGoalButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ParseObject addGoal1 = new ParseObject("GoalsToAccomplish");
+                String goal = addGoal.getText().toString();
+
+                addGoal1.put("Goal", goal);
+
+                addGoal1.saveInBackground(new SaveCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        if (e == null) {
+                            // Success
+                            //sends back to personal exercise page
+
+                        } else {
+                            // Error
+                            System.out.println("error");
+                        }
+                    }
+                });
             }
         });
 

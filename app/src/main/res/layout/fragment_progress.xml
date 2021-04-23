@@ -29,20 +29,20 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginEnd="45dp"
                     android:background="@android:drawable/bottom_bar"
+                    android:text=""
                     android:textAlignment="center"
-                    android:textSize="48dp"
-                    android:text="" />
+                    android:textSize="48dp" />
 
                 <TextView
                     android:id="@+id/accomplishedGoalsText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/statusImage"
-                    android:text="Accomplished Goals"
-                    android:textSize="20dp"
-                    android:textAlignment="center"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="20dp" />
+                    android:layout_marginTop="20dp"
+                    android:text="Accomplished Goals"
+                    android:textAlignment="center"
+                    android:textSize="20dp" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvAccomplished"
@@ -54,16 +54,36 @@
                     android:layout_marginBottom="0dp"
                     app:layout_constraintTop_toBottomOf="@+id/accomplishedGoalsText" />
 
+                <EditText
+                    android:id="@+id/editTextAddGoal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rvAccomplished"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="Add Goal!"
+                    android:layout_marginLeft="10dp"/>
+
+                <Button
+                    android:id="@+id/buttonAddGoal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Button"
+                    android:layout_toRightOf="@+id/editTextAddGoal"
+                    android:layout_below="@+id/rvAccomplished"
+                    android:layout_marginLeft="60dp"/>
+
                 <TextView
                     android:id="@+id/goalsToAccomplishText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/rvAccomplished"
-                    android:text="Goals To Accomplish"
-                    android:textSize="20dp"
-                    android:textAlignment="center"
+                    android:layout_below="@+id/editTextAddGoal"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="20dp" />
+                    android:layout_marginTop="10dp"
+                    android:text="Goals To Accomplish"
+                    android:textAlignment="center"
+                    android:textSize="20dp" />
+
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvToAccomplish"
@@ -74,6 +94,8 @@
                     android:layout_marginTop="0dp"
                     android:layout_marginBottom="0dp"
                     app:layout_constraintTop_toBottomOf="@+id/goalsToAccomplishText" />
+
+
 
             </RelativeLayout>
 
