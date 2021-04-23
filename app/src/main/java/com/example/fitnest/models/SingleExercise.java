@@ -7,6 +7,10 @@ public class SingleExercise {
     int exeeciseSets;
     String ytID;
 
+    public SingleExercise(String exerciseName){
+        this.exerciseName = exerciseName;
+    }
+
     public SingleExercise(String exerciseName, int exerciseReps, int exeeciseSets, String ytID) {
         this.exerciseName = exerciseName;
         this.exerciseReps = exerciseReps;

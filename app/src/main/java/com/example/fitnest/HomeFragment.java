@@ -7,6 +7,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 
 import android.os.Handler;
@@ -17,9 +19,21 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.fitnest.adapters.HomeExerciseAdapter;
+import com.example.fitnest.adapters.PersonalPlansAdapter;
+import com.example.fitnest.models.SingleExercise;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -67,8 +81,11 @@ public class HomeFragment extends Fragment {
     private Button button_incr;
     private Button button_decr;
     private Button testButton;
+    private RecyclerView rvHome;
 
+    HomeExerciseAdapter adapter;
 
+    ArrayList<SingleExercise> groupNames;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -94,19 +111,52 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
+
+
         progress_bar = view.findViewById(R.id.progress_bar);
         calorie_progress_bar = view.findViewById(R.id.calorie_progress_bar);
         button_incr = view.findViewById(R.id.button_incr);
         button_decr = view.findViewById(R.id.button_decr);
-        TextView date = view.findViewById(R.id.date_textview);
+        //TextView date = view.findViewById(R.id.date_textview);
+        rvHome = view.findViewById(R.id.recyclerHome);
 
         Calendar calendar = Calendar.getInstance();
         String currentDate = DateFormat.getDateInstance().format(calendar.getTime());
 
-        date.setText(currentDate);
+        //date.setText(currentDate);
 
-        //Intent intent = new Intent(getContext(), PersonalPlans.class);
-        //testButton = view.findViewById(R.id.button1);
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Back");
+        //query.selectKeys(Arrays.asList("exerciseName", "workoutReps", "workoutSets", "workoutYtID"));
+        query.selectKeys(Arrays.asList("exerciseName"));
+        query.addDescendingOrder("exerciseName");
+
+        groupNames = new ArrayList<>();
+        //final SingleExercise[] tempExercise = new SingleExercise[1];
+
+        query.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> objects, ParseException e) {
+                if (e == null) {
+
+                    for (ParseObject o: objects) {
+                        System.out.println("ParseObject: " + o.get("exerciseName"));
+                        //SingleExercise tempExercise = new SingleExercise(o.get("exerciseName").toString(), Integer.parseInt(o.get("workoutReps").toString()), Integer.parseInt(o.get("workoutSets").toString()), o.get("workoutYtID").toString());
+                        //groupNames.add(o.get("nameOfGroup").toString());
+                        SingleExercise tempExercise = new SingleExercise(o.get("exerciseName").toString());
+                        groupNames.add(tempExercise);
+                    }
+
+                    setUpAdapter(groupNames);
+
+                    Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT).show();
+                } else {
+                    // Something is wrong
+                    Toast.makeText(getContext(), "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
 
         updateProgressBar();
         button_incr.setOnClickListener(new View.OnClickListener() {
@@ -153,5 +203,14 @@ public class HomeFragment extends Fragment {
             }
         },50);
 
+    }
+
+    public void setUpAdapter(ArrayList<SingleExercise> groupNames){
+        // set up the RecyclerView
+        RecyclerView recyclerView = getView().findViewById(R.id.recyclerHome);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        adapter = new HomeExerciseAdapter(getContext(), groupNames);
+        //adapter.setClickListener(this);
+        recyclerView.setAdapter(adapter);
     }
 }
