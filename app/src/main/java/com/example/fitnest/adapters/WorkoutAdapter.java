@@ -25,6 +25,7 @@ import java.util.ArrayList;
 
 public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.ViewHolder>{
 
+    //adapter for the main workout page
     public static final String YOUTUBE_API_KEY = "AIzaSyAIF6220mZ2d1v53FU7cvOeSh2as1kmT44";
     Context context;
     ArrayList<WorkoutItem> workoutList;

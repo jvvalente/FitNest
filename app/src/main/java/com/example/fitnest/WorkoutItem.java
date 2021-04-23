@@ -9,9 +9,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubePlayerView;
+import com.parse.ParseClassName;
 
+@ParseClassName("WorkoutItem")
 public class WorkoutItem {
 
+    //model class
     public String workoutType, workoutInfo, videoID;
     private boolean expanded;
 
@@ -23,7 +26,11 @@ public class WorkoutItem {
         this.expanded = expanded;
     }
 
-    public WorkoutItem(){ }
+    public WorkoutItem(){
+        this.workoutType = "unknown";
+        this.workoutInfo = "unknown";
+        this.videoID = "unknown";
+    }
 
     public WorkoutItem(String workoutType, String workoutInfo, String videoID) {
         this.workoutType = workoutType;

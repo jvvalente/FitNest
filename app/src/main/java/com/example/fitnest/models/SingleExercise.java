@@ -3,13 +3,19 @@ package com.example.fitnest.models;
 public class SingleExercise {
 
     String exerciseName;
-    String workoutInfo;
-    String etc;
+    int exerciseReps;
+    int exeeciseSets;
+    String ytID;
 
-    public SingleExercise(String exerciseName, String workoutInfo, String ETC) {
+    public SingleExercise(String exerciseName){
         this.exerciseName = exerciseName;
-        this.workoutInfo = workoutInfo;
-        this.etc = ETC;
+    }
+
+    public SingleExercise(String exerciseName, int exerciseReps, int exeeciseSets, String ytID) {
+        this.exerciseName = exerciseName;
+        this.exerciseReps = exerciseReps;
+        this.exeeciseSets = exeeciseSets;
+        this.ytID = ytID;
     }
 
     public String getExerciseName() {
@@ -20,20 +26,27 @@ public class SingleExercise {
         this.exerciseName = exerciseName;
     }
 
-    public String getWorkoutInfo() {
-        return workoutInfo;
+    public int getExerciseReps() {
+        return exerciseReps;
     }
 
-    public void setWorkoutInfo(String workoutInfo) {
-        this.workoutInfo = workoutInfo;
+    public void setExerciseReps(int exerciseReps) {
+        this.exerciseReps = exerciseReps;
     }
 
-    public String getETC() {
-        return etc;
+    public int getExeeciseSets() {
+        return exeeciseSets;
     }
 
-    public void setETC(String ETC) {
-        this.etc = ETC;
+    public void setExeeciseSets(int exeeciseSets) {
+        this.exeeciseSets = exeeciseSets;
     }
 
+    public String getYtID() {
+        return ytID;
+    }
+
+    public void setYtID(String ytID) {
+        this.ytID = ytID;
+    }
 }

@@ -2,38 +2,29 @@ package com.example.fitnest.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.example.fitnest.PersonalPlans;
 import com.example.fitnest.R;
-import com.parse.ParseUser;
+import com.example.fitnest.models.SingleExercise;
 
 import java.util.List;
 
-import static java.security.AccessController.getContext;
+public class HomeExerciseAdapter extends RecyclerView.Adapter<HomeExerciseAdapter.ViewHolder> {
 
-public class PersonalPlansAdapter extends RecyclerView.Adapter<PersonalPlansAdapter.ViewHolder> {
-
-    private List<String> mData;
+    private List<SingleExercise> mData;
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
 
-    ParseUser user;
-    ConstraintLayout workoutPersonal;
-    TextView tvWorkoutName;
-
     // data is passed into the constructor
-    public PersonalPlansAdapter(Context context, List<String> data) {
+    public HomeExerciseAdapter(Context context, List<SingleExercise> data) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
     }
@@ -41,16 +32,17 @@ public class PersonalPlansAdapter extends RecyclerView.Adapter<PersonalPlansAdap
     // inflates the row layout from xml when needed
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = mInflater.inflate(R.layout.item_personal_plans, parent, false);
-        user = ParseUser.getCurrentUser();
+        View view = mInflater.inflate(R.layout.item_home_workout, parent, false);
         return new ViewHolder(view);
     }
 
     // binds the data to the TextView in each row
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        String animal = mData.get(position);
-        holder.myTextView.setText(animal);
+        SingleExercise animal = mData.get(position);
+        holder.myTextView.setText(animal.getExerciseName());
+        holder.Sets.setText("Sets: " + animal.getExeeciseSets());
+        holder.Reps.setText("Reps: " + animal.getExerciseReps());
     }
 
     // total number of rows
@@ -62,27 +54,30 @@ public class PersonalPlansAdapter extends RecyclerView.Adapter<PersonalPlansAdap
     // stores and recycles views as they are scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView myTextView;
+        TextView Sets;
+        TextView Reps;
 
         ViewHolder(View itemView) {
             super(itemView);
             myTextView = itemView.findViewById(R.id.tvWorkoutName);
+            Sets = itemView.findViewById(R.id.textViewSets);
+            Reps = itemView.findViewById(R.id.textViewReps);
             itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
             if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
-            System.out.println("This works!" + getAdapterPosition() + " " + getItem(getAdapterPosition()));
-            String tableName = getItem(getAdapterPosition()).substring(1,getItem(getAdapterPosition()).length()-1);
-            user.put("selectedWorkout", tableName);
-            user.put("workoutSelected", "True");
+            //System.out.println("This works!" + getAdapterPosition() + " " + getItem(getAdapterPosition()));
+
+
         }
     }
 
     // convenience method for getting data at click position
-    String getItem(int id) {
+    /*String getItem(int id) {
         return mData.get(id);
-    }
+    }*/
 
     // allows clicks events to be caught
     void setClickListener(ItemClickListener itemClickListener) {

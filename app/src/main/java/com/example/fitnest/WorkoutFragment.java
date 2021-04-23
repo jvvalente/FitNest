@@ -26,19 +26,29 @@ import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerFragment;
 import com.google.android.youtube.player.YouTubePlayerView;
+import com.parse.Parse;
+import com.parse.ParseException;
+import com.parse.ParseInstallation;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import devs.mulham.horizontalcalendar.HorizontalCalendar;
 import devs.mulham.horizontalcalendar.utils.HorizontalCalendarListener;
 
 public class WorkoutFragment extends Fragment {
-
+    //main workout page
+    ParseUser user;
     HorizontalCalendar horizontalCalendar;
     RecyclerView rvWorkout;
 
     private ArrayList<WorkoutItem> workoutList;
+
+    private ArrayList<ArrayList<WorkoutItem>> workoutArray;
 
     public WorkoutFragment() {
         // Required empty public constructor
@@ -62,42 +72,11 @@ public class WorkoutFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_workout, container, false);
         setHasOptionsMenu(true);
 
-        workoutList = new ArrayList<>();
-        setWorkoutList();
+        //sets user to the current user
+        user = ParseUser.getCurrentUser();
 
-        //sets up the RecyclerView and it's adapter
-        v = setRecyclerView(v);
+        //calendar stuff
 
-        //sets up the HorizontalCalendar
-        v = setHorizontalCalendar(v);
-
-        return v;
-    }
-
-    //temporaty function to hardcode some values
-    //TODO: get the data from our database
-    private void setWorkoutList(){
-        workoutList.add(new WorkoutItem("pushup","do a pushup","<iframe width=\"100%\" height=\"100%\" src=\"" + String.format("https://www.youtube.com/embed/%s","IODxDxX7oi4") + "\" frameborder=\"0\" allowfullscreen><iframe>" ));
-        workoutList.add(new WorkoutItem("sit up","Do a situp","<iframe width=\"100%\" height=\"100%\" src=\"" + String.format("https://www.youtube.com/embed/%s","1fbU_MkV7NE") + "\" frameborder=\"0\" allowfullscreen><iframe>" ));
-        workoutList.add(new WorkoutItem("weights","do dumbell curl ups","<iframe width=\"100%\" height=\"100%\" src=\"" + String.format("https://www.youtube.com/embed/%s","av7-8igSXTs") + "\" frameborder=\"0\" allowfullscreen><iframe>" ));
-    }
-
-    private View setRecyclerView(View v){
-        //Get reference to recycler view
-        rvWorkout = (RecyclerView) v.findViewById(R.id.rvWorkout);
-        //set layout manager
-        rvWorkout.setLayoutManager(new LinearLayoutManager(getActivity()));
-        //create an adapter
-        WorkoutAdapter workoutAdapter = new WorkoutAdapter(getActivity(),workoutList);
-        //set the adapter
-        rvWorkout.setAdapter(workoutAdapter);
-        //set item animator to Default animator
-        rvWorkout.setItemAnimator(new DefaultItemAnimator());
-
-        return v;
-    }
-
-    private View setHorizontalCalendar(View v){
         /* starts before 1 month from now */
         Calendar startDate = Calendar.getInstance();
         startDate.add(Calendar.MONTH, -1);
@@ -111,14 +90,69 @@ public class WorkoutFragment extends Fragment {
                 .datesNumberOnScreen(5)
                 .build();
 
+        workoutArray = new ArrayList<>();
+        for(int i = 0; i<100; i++){
+            workoutArray.add(new ArrayList<>());
+        }
+
         horizontalCalendar.setCalendarListener(new HorizontalCalendarListener() {
-            @Override
-            public void onDateSelected(Calendar date, int position) {
-                //do something
-            }
+           @Override
+           public void onDateSelected(Calendar date, int position) {
+               user.put("dateIndex",position);
+               try {
+                   setWorkoutList();
+               } catch (ParseException e) {
+                   e.printStackTrace();
+               }
+               //Get reference to recycler view
+               rvWorkout = (RecyclerView) v.findViewById(R.id.rvWorkout);
+               //set layout manager
+               rvWorkout.setLayoutManager(new LinearLayoutManager(getActivity()));
+               //create an adapter
+               WorkoutAdapter workoutAdapter = new WorkoutAdapter(getActivity(),workoutArray.get(position));
+               //set the adapter
+               rvWorkout.setAdapter(workoutAdapter);
+               //set item animator to Default animator
+               rvWorkout.setItemAnimator(new DefaultItemAnimator());
+
+               String pos = "" + position;
+               Toast.makeText(getContext(), pos, Toast.LENGTH_LONG).show();
+           }
         });
 
         return v;
+    }
+
+    //temporary function to hardcode some values
+    //TODO: get the data from our database
+    private void setWorkoutList() throws ParseException {
+        int index = (int)user.get("dateIndex");
+        Log.i("WorkoutFragment","date index = " + index);
+
+        String workoutSelected = user.get("workoutSelected").toString();
+        if(workoutSelected == "True"){
+            String table = user.get("selectedWorkout").toString();
+
+            ParseQuery parse = new ParseQuery(table);
+            List<ParseObject> results = parse.find();
+
+            String workoutType;
+            String workoutInfo;
+            String videoID;
+            for (int i = 0; i < results.size(); i++) {
+                Log.i("WorkoutFragment", "exercise name: " + results.get(i).get("exerciseName").toString());
+                workoutType = results.get(i).get("exerciseName").toString();
+                workoutInfo = workoutType;
+                videoID = results.get(i).get("workoutYtID").toString();
+                videoID = videoID.substring(1,videoID.length() -1);
+                Log.i("WorkoutFragment","videoID: " + videoID);
+                workoutArray.get(index).add(new WorkoutItem(workoutType, workoutInfo, "<iframe width=\"100%\" height=\"100%\" src=\"" + String.format("https://www.youtube.com/embed/%s", videoID + "\" frameborder=\"0\" allowfullscreen><iframe>")));
+            }
+            user.put("workoutSelected", "False");
+        }
+        //workoutArray.get(35).add(new WorkoutItem("pushup","do a pushup","<iframe width=\"100%\" height=\"100%\" src=\"" + String.format("https://www.youtube.com/embed/%s","IODxDxX7oi4") + "\" frameborder=\"0\" allowfullscreen><iframe>" ));
+        //workoutArray.get(35).add(new WorkoutItem("sit up","Do a situp","<iframe width=\"100%\" height=\"100%\" src=\"" + String.format("https://www.youtube.com/embed/%s","1fbU_MkV7NE") + "\" frameborder=\"0\" allowfullscreen><iframe>" ));
+        //workoutArray.get(35).add(new WorkoutItem("weights","do dumbell curl ups","<iframe width=\"100%\" height=\"100%\" src=\"" + String.format("https://www.youtube.com/embed/%s","av7-8igSXTs") + "\" frameborder=\"0\" allowfullscreen><iframe>" ));
     }
 
     @Override
