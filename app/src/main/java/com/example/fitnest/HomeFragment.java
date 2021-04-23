@@ -127,8 +127,8 @@ public class HomeFragment extends Fragment {
 
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Back");
         //query.selectKeys(Arrays.asList("exerciseName", "workoutReps", "workoutSets", "workoutYtID"));
-        query.selectKeys(Arrays.asList("exerciseName"));
-        query.addDescendingOrder("exerciseName");
+        //query.selectKeys(Arrays.asList("exerciseName"));
+        //query.addDescendingOrder("exerciseName");
 
         groupNames = new ArrayList<>();
         //final SingleExercise[] tempExercise = new SingleExercise[1];
@@ -139,10 +139,22 @@ public class HomeFragment extends Fragment {
                 if (e == null) {
 
                     for (ParseObject o: objects) {
-                        System.out.println("ParseObject: " + o.get("exerciseName"));
+                        //System.out.println("ParseObject: " + o.get("exerciseName") + Integer.parseInt(o.get("workoutReps").toString()) + Integer.parseInt(o.get("workoutSets").toString()) + o.get("workoutYtID").toString());
+
+                        String name = o.get("exerciseName").toString();
+                        name = name.substring(1, name.length()-1);
+                        String reps = o.get("workoutReps").toString();
+                        reps = reps.substring(1, reps.length()-1);
+                        String sets = o.get("workoutSets").toString();
+                        sets = sets.substring(1, sets.length()-1);
+                        String Id = o.get("workoutYtID").toString();
+                        Id = Id.substring(1, reps.length()-1);
+
+                        System.out.println("ParseObject: " + o.get("exerciseName") + Integer.parseInt(reps) + Integer.parseInt(sets) + Id);
                         //SingleExercise tempExercise = new SingleExercise(o.get("exerciseName").toString(), Integer.parseInt(o.get("workoutReps").toString()), Integer.parseInt(o.get("workoutSets").toString()), o.get("workoutYtID").toString());
                         //groupNames.add(o.get("nameOfGroup").toString());
-                        SingleExercise tempExercise = new SingleExercise(o.get("exerciseName").toString());
+                        //SingleExercise tempExercise = new SingleExercise(o.get("exerciseName").toString());
+                        SingleExercise tempExercise = new SingleExercise(name, Integer.parseInt(reps), Integer.parseInt(sets), Id);
                         groupNames.add(tempExercise);
                     }
 
