@@ -49,15 +49,15 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="MissingConstraints" />
 
-            <TextView
-                android:id="@+id/tvPoints"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="10"
-                android:textSize="40dp"
+            <Button
+                android:id="@+id/buttonAccomplishment"
+                android:layout_width="100dp"
+                android:layout_height="46dp"
                 android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
                 android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="Done"
+                android:textSize="15dp"
                 app:layout_constraintBottom_toBottomOf="@+id/ivBox"
                 app:layout_constraintEnd_toEndOf="@+id/ivBox"
                 app:layout_constraintTop_toTopOf="@+id/ivBox"
