@@ -34,7 +34,7 @@ public class NutritionFragment extends Fragment {
     private RecyclerView.LayoutManager nLayoutManager;
     // TODO: Rename and change types of parameters
     private String mParam1;
-    private String mParam2;
+    private String mParam2;;
 
     /**
      * Use this factory method to create a new instance of
@@ -80,8 +80,13 @@ public class NutritionFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(layout.fragment_nutrition, container,false);
 
-        ArrayList<NutritionCardview>  cardviews = new ArrayList<>();
-        cardviews.add(new NutritionCardview("Meal"));
+
+
+
+        ArrayList<NutritionCardview> cardviews = new ArrayList<>();
+        cardviews.add(new NutritionCardview("Meal 1"));
+        cardviews.add(new NutritionCardview("Meal2"));
+        cardviews.add(new NutritionCardview("Meal3"));
 
         nRecyclerView = view.findViewById(R.id.recycler_view);
         nRecyclerView.setHasFixedSize(true);
@@ -107,22 +112,10 @@ public class NutritionFragment extends Fragment {
             }
         });
 
-        /*
-        ArrayList<NutritionCardview>  cardviews = new ArrayList<>();
-        cardviews.add(new NutritionCardview("Meal"));
-
-        nRecyclerView = nRecyclerView.findViewById(R.id.recycler_view);
-        nRecyclerView.setHasFixedSize(true);
-        nAdapter = new NutritionAdapter(cardviews);
-        nLayoutManager = new LinearLayoutManager(getActivity());
-        nRecyclerView.setLayoutManager(nLayoutManager);
-        nRecyclerView.setAdapter(nAdapter);
-        */
-    }
-
-    public void openNutrition2(){
-        Intent intent = new Intent(String.valueOf(Nutrition2.class));
-        startActivity(intent);
 
     }
+
+
+
+
 }
