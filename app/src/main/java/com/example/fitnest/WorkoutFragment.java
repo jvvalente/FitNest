@@ -68,6 +68,7 @@ public class WorkoutFragment extends Fragment {
 
         user = ParseUser.getCurrentUser();
 
+        //calendar stuff
 
         /* starts before 1 month from now */
         Calendar startDate = Calendar.getInstance();
@@ -87,16 +88,26 @@ public class WorkoutFragment extends Fragment {
             workoutArray.add(new ArrayList<>());
         }
 
+        horizontalCalendar.setCalendarListener(new HorizontalCalendarListener() {
+           @Override
+           public void onDateSelected(Calendar date, int position) {
+               user.put("dateIndex",position);
+               setWorkoutList();
+               //Get reference to recycler view
+               rvWorkout = (RecyclerView) v.findViewById(R.id.rvWorkout);
+               //set layout manager
+               rvWorkout.setLayoutManager(new LinearLayoutManager(getActivity()));
+               //create an adapter
+               WorkoutAdapter workoutAdapter = new WorkoutAdapter(getActivity(),workoutArray.get(position));
+               //set the adapter
+               rvWorkout.setAdapter(workoutAdapter);
+               //set item animator to Default animator
+               rvWorkout.setItemAnimator(new DefaultItemAnimator());
 
-
-//        workoutList = new ArrayList<>();
-        //setWorkoutList();
-
-        //sets up the RecyclerView and it's adapter
-        //v = setRecyclerView(v);
-
-        //sets up the HorizontalCalendar
-        v = setHorizontalCalendar(v);
+               String pos = "" + position;
+               Toast.makeText(getContext(), pos, Toast.LENGTH_LONG).show();
+           }
+        });
 
         return v;
     }
@@ -109,67 +120,6 @@ public class WorkoutFragment extends Fragment {
         workoutArray.get(35).add(new WorkoutItem("pushup","do a pushup","<iframe width=\"100%\" height=\"100%\" src=\"" + String.format("https://www.youtube.com/embed/%s","IODxDxX7oi4") + "\" frameborder=\"0\" allowfullscreen><iframe>" ));
         workoutArray.get(35).add(new WorkoutItem("sit up","Do a situp","<iframe width=\"100%\" height=\"100%\" src=\"" + String.format("https://www.youtube.com/embed/%s","1fbU_MkV7NE") + "\" frameborder=\"0\" allowfullscreen><iframe>" ));
         workoutArray.get(35).add(new WorkoutItem("weights","do dumbell curl ups","<iframe width=\"100%\" height=\"100%\" src=\"" + String.format("https://www.youtube.com/embed/%s","av7-8igSXTs") + "\" frameborder=\"0\" allowfullscreen><iframe>" ));
-    }
-
-    private View setRecyclerView(View v){
-        //Get reference to recycler view
-        rvWorkout = (RecyclerView) v.findViewById(R.id.rvWorkout);
-        //set layout manager
-        rvWorkout.setLayoutManager(new LinearLayoutManager(getActivity()));
-        //create an adapter
-        WorkoutAdapter workoutAdapter = new WorkoutAdapter(getActivity(),workoutList);
-        //set the adapter
-        rvWorkout.setAdapter(workoutAdapter);
-        //set item animator to Default animator
-        rvWorkout.setItemAnimator(new DefaultItemAnimator());
-
-        return v;
-    }
-
-    private View setHorizontalCalendar(View v){
-//        /* starts before 1 month from now */
-//        Calendar startDate = Calendar.getInstance();
-//        startDate.add(Calendar.MONTH, -1);
-//
-//        /* ends after 1 month from now */
-//        Calendar endDate = Calendar.getInstance();
-//        endDate.add(Calendar.MONTH, 1);
-//
-//        horizontalCalendar = new HorizontalCalendar.Builder(v, R.id.calendarView)
-//                .range(startDate, endDate)
-//                .datesNumberOnScreen(5)
-//                .build();
-//
-//        horizontalCalendar.getSelectedDatePosition();
-
-        horizontalCalendar.setCalendarListener(new HorizontalCalendarListener() {
-            @Override
-            public void onDateSelected(Calendar date, int position) {
-                user.put("dateIndex",position);
-                setWorkoutList();
-                //Get reference to recycler view
-                rvWorkout = (RecyclerView) v.findViewById(R.id.rvWorkout);
-                //set layout manager
-                rvWorkout.setLayoutManager(new LinearLayoutManager(getActivity()));
-                //create an adapter
-                WorkoutAdapter workoutAdapter = new WorkoutAdapter(getActivity(),workoutArray.get(position));
-                //set the adapter
-                rvWorkout.setAdapter(workoutAdapter);
-                //set item animator to Default animator
-                rvWorkout.setItemAnimator(new DefaultItemAnimator());
-
-                String pos = "" + position;
-                Toast.makeText(getContext(), pos, Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public boolean onDateLongClicked(Calendar date, int position){
-                Toast.makeText(getContext(), "hi", Toast.LENGTH_LONG).show();
-                return true;
-            }
-        });
-
-        return v;
     }
 
     @Override
