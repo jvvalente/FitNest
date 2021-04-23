@@ -6,9 +6,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.fitnest.adapters.NutritionAdapter;
+
+import java.util.ArrayList;
 
 import static com.example.fitnest.R.layout;
 
@@ -24,13 +29,12 @@ public class NutritionFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private Button button;
+    private RecyclerView nRecyclerView;
+    private RecyclerView.Adapter nAdapter;
+    private RecyclerView.LayoutManager nLayoutManager;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
-    public NutritionFragment() {
-        // Required empty public constructor
-    }
 
     /**
      * Use this factory method to create a new instance of
@@ -53,30 +57,42 @@ public class NutritionFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
+        /*if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-        /*Spinner spinner = findViewById(R,id.spinner1);*/
+        ArrayList<NutritionCardview>  cardviews = new ArrayList<>();
+        cardviews.add(new NutritionCardview("Meal"));
 
+        nRecyclerView = nRecyclerView.findViewById(R.id.hc_events_recyclerView);
+        nRecyclerView.setHasFixedSize(true);
+        nAdapter = new NutritionAdapter(cardviews);
+        nLayoutManager = new LinearLayoutManager(getActivity());
+        nRecyclerView.setLayoutManager(nLayoutManager);
+        nRecyclerView.setAdapter(nAdapter);
+    */
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(layout.fragment_nutrition, container, false);
+        View view = inflater.inflate(layout.fragment_nutrition, container,false);
 
-       /* button = (Button) getView().findViewById(R.id.nutritionbutton);
-        button.setOnClickListener(new View.OnClickListener(){
-        @Override
-        public void onClick(View v){
+        ArrayList<NutritionCardview>  cardviews = new ArrayList<>();
+        cardviews.add(new NutritionCardview("Meal"));
 
-            }
-    });
-*/
-    
+        nRecyclerView = view.findViewById(R.id.recycler_view);
+        nRecyclerView.setHasFixedSize(true);
+        nAdapter = new NutritionAdapter(cardviews);
+        nLayoutManager = new LinearLayoutManager(getActivity());
+        nRecyclerView.setLayoutManager(nLayoutManager);
+        nRecyclerView.setAdapter(nAdapter);
+
+
+
+        return view;
     }
 
     @Override
@@ -91,6 +107,17 @@ public class NutritionFragment extends Fragment {
             }
         });
 
+        /*
+        ArrayList<NutritionCardview>  cardviews = new ArrayList<>();
+        cardviews.add(new NutritionCardview("Meal"));
+
+        nRecyclerView = nRecyclerView.findViewById(R.id.recycler_view);
+        nRecyclerView.setHasFixedSize(true);
+        nAdapter = new NutritionAdapter(cardviews);
+        nLayoutManager = new LinearLayoutManager(getActivity());
+        nRecyclerView.setLayoutManager(nLayoutManager);
+        nRecyclerView.setAdapter(nAdapter);
+        */
     }
 
     public void openNutrition2(){

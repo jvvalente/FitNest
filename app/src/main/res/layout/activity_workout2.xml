@@ -101,5 +101,4 @@
                 android:text="5 Day bro split" />
         </LinearLayout>
     </ScrollView>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

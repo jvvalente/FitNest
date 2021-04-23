@@ -7,90 +7,99 @@
     tools:context=".NutritionFragment">
 
     <!-- TODO: Update blank fragment layout -->
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="122dp">
-    </LinearLayout>
-
-
     <TextView
-        android:id="@+id/textView4"
-        android:layout_width="167dp"
-        android:layout_height="49dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="114dp"
-        android:layout_marginTop="62dp"
-        android:autoSizeTextType="uniform"
-        android:text="@string/create_a_meal"
-        tools:targetApi="o" />
+            android:id="@+id/textView4"
+            android:layout_width="167dp"
+            android:layout_height="49dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="114dp"
+            android:layout_marginTop="62dp"
+            android:autoSizeTextType="uniform"
+            android:text="@string/create_a_meal"
+            tools:targetApi="o" />
 
-    <EditText
-        android:id="@+id/MealName"
+    <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="164dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Meal Description" />
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="87dp">
 
-    <EditText
-        android:id="@+id/CaloriesNumber"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="225dp"
-        android:ems="10"
-        android:hint="Number of Calories"
-        android:inputType="number" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/ProteinNumber"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="281dp"
-        android:ems="10"
-        android:hint="Protein "
-        android:inputType="number" />
+            <EditText
+                android:id="@+id/MealName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="164dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Meal Description" />
 
-    <EditText
-        android:id="@+id/CarbsNumber"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:ems="10"
-        android:hint="Carbs"
-        android:inputType="number" />
+            <EditText
+                android:id="@+id/CaloriesNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="225dp"
+                android:ems="10"
+                android:hint="Number of Calories"
+                android:inputType="number" />
 
-    <EditText
-        android:id="@+id/FatNumber"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="285dp"
-        android:ems="10"
-        android:hint="Fat"
-        android:inputType="number" />
+            <EditText
+                android:id="@+id/ProteinNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="281dp"
+                android:ems="10"
+                android:hint="Protein "
+                android:inputType="number" />
 
-    <Button
-        android:id="@+id/submitbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="205dp"
-        android:text="Submit" />
+            <EditText
+                android:id="@+id/CarbsNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:ems="10"
+                android:hint="Carbs"
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/FatNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="285dp"
+                android:ems="10"
+                android:hint="Fat"
+                android:inputType="number" />
+
+            <Button
+                android:id="@+id/submitbutton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="205dp"
+                android:text="Submit" />
+
+        </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>
