@@ -41,6 +41,7 @@ import devs.mulham.horizontalcalendar.HorizontalCalendar;
 import devs.mulham.horizontalcalendar.utils.HorizontalCalendarListener;
 
 public class WorkoutFragment extends Fragment {
+    //main workout page
     ParseUser user;
     HorizontalCalendar horizontalCalendar;
     RecyclerView rvWorkout;
@@ -129,7 +130,7 @@ public class WorkoutFragment extends Fragment {
         Log.i("WorkoutFragment","date index = " + index);
 
         String workoutSelected = user.get("workoutSelected").toString();
-        //if(workoutSelected == "True"){
+        if(workoutSelected == "True"){
             String table = user.get("selectedWorkout").toString();
 
             ParseQuery parse = new ParseQuery(table);
@@ -148,7 +149,7 @@ public class WorkoutFragment extends Fragment {
                 workoutArray.get(index).add(new WorkoutItem(workoutType, workoutInfo, "<iframe width=\"100%\" height=\"100%\" src=\"" + String.format("https://www.youtube.com/embed/%s", videoID + "\" frameborder=\"0\" allowfullscreen><iframe>")));
             }
             user.put("workoutSelected", "False");
-        //}
+        }
         //workoutArray.get(35).add(new WorkoutItem("pushup","do a pushup","<iframe width=\"100%\" height=\"100%\" src=\"" + String.format("https://www.youtube.com/embed/%s","IODxDxX7oi4") + "\" frameborder=\"0\" allowfullscreen><iframe>" ));
         //workoutArray.get(35).add(new WorkoutItem("sit up","Do a situp","<iframe width=\"100%\" height=\"100%\" src=\"" + String.format("https://www.youtube.com/embed/%s","1fbU_MkV7NE") + "\" frameborder=\"0\" allowfullscreen><iframe>" ));
         //workoutArray.get(35).add(new WorkoutItem("weights","do dumbell curl ups","<iframe width=\"100%\" height=\"100%\" src=\"" + String.format("https://www.youtube.com/embed/%s","av7-8igSXTs") + "\" frameborder=\"0\" allowfullscreen><iframe>" ));
