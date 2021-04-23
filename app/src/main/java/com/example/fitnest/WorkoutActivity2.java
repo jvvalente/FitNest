@@ -128,6 +128,7 @@ public class WorkoutActivity2 extends AppCompatActivity implements PersonalPlans
         dialog.show();
     }
 
+    // allows plans to be accessed and opened to allow user to use workout during the current day
     private void openPersonalPlans(String name){
         Intent intent = new Intent(this, PersonalPlans.class);
         intent.putExtra("WorkoutGroupName", name);
