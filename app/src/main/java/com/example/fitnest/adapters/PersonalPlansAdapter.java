@@ -2,25 +2,35 @@ package com.example.fitnest.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.example.fitnest.PersonalPlans;
 import com.example.fitnest.R;
+import com.parse.ParseUser;
 
 import java.util.List;
+
+import static java.security.AccessController.getContext;
 
 public class PersonalPlansAdapter extends RecyclerView.Adapter<PersonalPlansAdapter.ViewHolder> {
 
     private List<String> mData;
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
+
+    ParseUser user;
+    ConstraintLayout workoutPersonal;
+    TextView tvWorkoutName;
 
     // data is passed into the constructor
     public PersonalPlansAdapter(Context context, List<String> data) {
@@ -32,6 +42,7 @@ public class PersonalPlansAdapter extends RecyclerView.Adapter<PersonalPlansAdap
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = mInflater.inflate(R.layout.item_personal_plans, parent, false);
+        user = ParseUser.getCurrentUser();
         return new ViewHolder(view);
     }
 
@@ -62,8 +73,9 @@ public class PersonalPlansAdapter extends RecyclerView.Adapter<PersonalPlansAdap
         public void onClick(View view) {
             if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
             System.out.println("This works!" + getAdapterPosition() + " " + getItem(getAdapterPosition()));
-
-
+            String tableName = getItem(getAdapterPosition()).substring(1,getItem(getAdapterPosition()).length()-1);
+            user.put("selectedWorkout", tableName);
+            user.put("workoutSelected", "True");
         }
     }
 

@@ -26,11 +26,16 @@ import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerFragment;
 import com.google.android.youtube.player.YouTubePlayerView;
+import com.parse.Parse;
+import com.parse.ParseException;
 import com.parse.ParseInstallation;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import devs.mulham.horizontalcalendar.HorizontalCalendar;
 import devs.mulham.horizontalcalendar.utils.HorizontalCalendarListener;
@@ -66,6 +71,7 @@ public class WorkoutFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_workout, container, false);
         setHasOptionsMenu(true);
 
+        //sets user to the current user
         user = ParseUser.getCurrentUser();
 
         //calendar stuff
@@ -92,7 +98,11 @@ public class WorkoutFragment extends Fragment {
            @Override
            public void onDateSelected(Calendar date, int position) {
                user.put("dateIndex",position);
-               setWorkoutList();
+               try {
+                   setWorkoutList();
+               } catch (ParseException e) {
+                   e.printStackTrace();
+               }
                //Get reference to recycler view
                rvWorkout = (RecyclerView) v.findViewById(R.id.rvWorkout);
                //set layout manager
@@ -114,12 +124,34 @@ public class WorkoutFragment extends Fragment {
 
     //temporary function to hardcode some values
     //TODO: get the data from our database
-    private void setWorkoutList(){
+    private void setWorkoutList() throws ParseException {
         int index = (int)user.get("dateIndex");
         Log.i("WorkoutFragment","date index = " + index);
-        workoutArray.get(35).add(new WorkoutItem("pushup","do a pushup","<iframe width=\"100%\" height=\"100%\" src=\"" + String.format("https://www.youtube.com/embed/%s","IODxDxX7oi4") + "\" frameborder=\"0\" allowfullscreen><iframe>" ));
-        workoutArray.get(35).add(new WorkoutItem("sit up","Do a situp","<iframe width=\"100%\" height=\"100%\" src=\"" + String.format("https://www.youtube.com/embed/%s","1fbU_MkV7NE") + "\" frameborder=\"0\" allowfullscreen><iframe>" ));
-        workoutArray.get(35).add(new WorkoutItem("weights","do dumbell curl ups","<iframe width=\"100%\" height=\"100%\" src=\"" + String.format("https://www.youtube.com/embed/%s","av7-8igSXTs") + "\" frameborder=\"0\" allowfullscreen><iframe>" ));
+
+        String workoutSelected = user.get("workoutSelected").toString();
+        //if(workoutSelected == "True"){
+            String table = user.get("selectedWorkout").toString();
+
+            ParseQuery parse = new ParseQuery(table);
+            List<ParseObject> results = parse.find();
+
+            String workoutType;
+            String workoutInfo;
+            String videoID;
+            for (int i = 0; i < results.size(); i++) {
+                Log.i("WorkoutFragment", "exercise name: " + results.get(i).get("exerciseName").toString());
+                workoutType = results.get(i).get("exerciseName").toString();
+                workoutInfo = workoutType;
+                videoID = results.get(i).get("workoutYtID").toString();
+                videoID = videoID.substring(1,videoID.length() -1);
+                Log.i("WorkoutFragment","videoID: " + videoID);
+                workoutArray.get(index).add(new WorkoutItem(workoutType, workoutInfo, "<iframe width=\"100%\" height=\"100%\" src=\"" + String.format("https://www.youtube.com/embed/%s", videoID + "\" frameborder=\"0\" allowfullscreen><iframe>")));
+            }
+            user.put("workoutSelected", "False");
+        //}
+        //workoutArray.get(35).add(new WorkoutItem("pushup","do a pushup","<iframe width=\"100%\" height=\"100%\" src=\"" + String.format("https://www.youtube.com/embed/%s","IODxDxX7oi4") + "\" frameborder=\"0\" allowfullscreen><iframe>" ));
+        //workoutArray.get(35).add(new WorkoutItem("sit up","Do a situp","<iframe width=\"100%\" height=\"100%\" src=\"" + String.format("https://www.youtube.com/embed/%s","1fbU_MkV7NE") + "\" frameborder=\"0\" allowfullscreen><iframe>" ));
+        //workoutArray.get(35).add(new WorkoutItem("weights","do dumbell curl ups","<iframe width=\"100%\" height=\"100%\" src=\"" + String.format("https://www.youtube.com/embed/%s","av7-8igSXTs") + "\" frameborder=\"0\" allowfullscreen><iframe>" ));
     }
 
     @Override
