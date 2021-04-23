@@ -13,8 +13,7 @@ import com.parse.ParseClassName;
 
 @ParseClassName("WorkoutItem")
 public class WorkoutItem {
-
-    //model class
+    
     public String workoutType, workoutInfo, videoID;
     private boolean expanded;
 
