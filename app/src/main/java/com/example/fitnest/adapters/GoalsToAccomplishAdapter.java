@@ -53,6 +53,8 @@ public class GoalsToAccomplishAdapter extends RecyclerView.Adapter<GoalsToAccomp
         return accomplishmentList.size();
     }
 
+
+
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         TextView tvAccomplishmentTo;
@@ -70,7 +72,6 @@ public class GoalsToAccomplishAdapter extends RecyclerView.Adapter<GoalsToAccomp
 
 //            ParseQuery<ParseObject> query1 = ParseQuery.getQuery("AccomplishedGoals");
             ParseQuery<ParseObject> query2 = ParseQuery.getQuery("GoalsToAccomplish");
-            query2.selectKeys(Arrays.asList("objectId"));
 
             doneButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -80,7 +81,7 @@ public class GoalsToAccomplishAdapter extends RecyclerView.Adapter<GoalsToAccomp
                     if (!tvAccomplishmentTo.getText().toString().equals("")) {
 
                         query1.put("Goal", tvAccomplishmentTo.getText().toString());
-                        query2.getInBackground("dSzjU7iBVz", (object, e) ->{
+                        query2.getInBackground("c7FADQKxv0", (object, e) ->{
                             if(e == null){
                                 object.deleteInBackground(e2 -> {
                                     if(e2 == null){

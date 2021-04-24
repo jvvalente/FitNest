@@ -68,10 +68,10 @@
                     android:id="@+id/buttonAddGoal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Button"
+                    android:text="Add"
                     android:layout_toRightOf="@+id/editTextAddGoal"
                     android:layout_below="@+id/rvAccomplished"
-                    android:layout_marginLeft="60dp"/>
+                    android:layout_marginLeft="60dp" />
 
                 <TextView
                     android:id="@+id/goalsToAccomplishText"
