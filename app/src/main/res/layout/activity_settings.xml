@@ -125,18 +125,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/settingsNotify" />
 
-    <EditText
-        android:id="@+id/settingCal"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="10dp"
-        android:ems="10"
-        android:hint="Input default water intake"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.481"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/settingsIntake" />
+
     <EditText
         android:id="@+id/settingsGoal"
         android:layout_width="300dp"
@@ -148,7 +137,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.481"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/settingCal" />
+        app:layout_constraintTop_toBottomOf="@+id/settingsIntake" />
 
     <Button
         android:id="@+id/btnSave"

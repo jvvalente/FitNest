@@ -41,7 +41,6 @@ import devs.mulham.horizontalcalendar.HorizontalCalendar;
 import devs.mulham.horizontalcalendar.utils.HorizontalCalendarListener;
 
 public class WorkoutFragment extends Fragment {
-    //main workout page
     ParseUser user;
     HorizontalCalendar horizontalCalendar;
     RecyclerView rvWorkout;
